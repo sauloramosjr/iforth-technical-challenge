@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/lib/prisma/generated"
@@ -14,9 +8,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Status {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id           String              @id @default(uuid())
+  name         String              @unique
+  password     String
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+
+  permissions  UserPermission[]
+}
 
 model Product {
-  id    Int     @id @default(autoincrement())
-  name  String
-  price Float
+  id               String          @id @default(uuid())
+  name             String
+  minProduction    Float
+  maxProduction    Float
+  status           Status          @default(ACTIVE)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  productions      ProductionEntry[]
+}
+
+model ProductionEntry {
+  id                  String       @id @default(uuid())
+  productId           String
+  quantityProduced    Float
+  status              Status       @default(ACTIVE)
+  justification       String?      
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+
+  product             Product      @relation(fields: [productId], references: [id])
+}
+
+model Permission {
+  id            String              @id @default(uuid())
+  name          String              @unique
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  users         UserPermission[]
+}
+
+model UserPermission {
+  id            String              @id @default(uuid())
+  userId        String
+  permissionId  String
+
+  user          User                @relation(fields: [userId], references: [id])
+  permission    Permission          @relation(fields: [permissionId], references: [id])
+
+  createdAt     DateTime            @default(now())
 }
