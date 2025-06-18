@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Login = ({ children }: React.PropsWithChildren) => {
-  return <div> {children} </div>;
+  return <div className='bg-black'> {children} </div>;
 };
 
 export default Login;
