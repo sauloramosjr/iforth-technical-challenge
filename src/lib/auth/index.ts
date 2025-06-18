@@ -17,12 +17,12 @@ export async function login(email: string, password: string) {
 //   return { user, token };
 }
 
-export function generateToken(userId: number) {
+export function generateToken(userId: string) {
   return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1d' });
 }
 
 export function verifyToken(token: string) {
-  return jwt.verify(token, JWT_SECRET) as { userId: number };
+  return jwt.verify(token, JWT_SECRET) as { userId: string };
 }
 
 export function refreshToken(oldToken: string) {

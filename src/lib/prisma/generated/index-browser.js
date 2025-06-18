@@ -117,10 +117,46 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  password: 'password',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ProductScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  price: 'price'
+  minProduction: 'minProduction',
+  maxProduction: 'maxProduction',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductionEntryScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  quantityProduced: 'quantityProduced',
+  status: 'status',
+  justification: 'justification',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PermissionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.UserPermissionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  permissionId: 'permissionId',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -128,9 +164,21 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+exports.Status = exports.$Enums.Status = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE'
+};
 
 exports.Prisma.ModelName = {
-  Product: 'Product'
+  User: 'User',
+  Product: 'Product',
+  ProductionEntry: 'ProductionEntry',
+  Permission: 'Permission',
+  UserPermission: 'UserPermission'
 };
 
 /**
