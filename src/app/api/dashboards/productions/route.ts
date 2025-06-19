@@ -1,7 +1,7 @@
-import prisma from '@/lib/prisma';
+import orm from '@/lib/orm';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const products = await prisma.product.findMany();
+  const products = await orm.product.findMany();
   return NextResponse.json(products);
 }

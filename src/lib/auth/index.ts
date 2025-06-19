@@ -1,31 +1,41 @@
-// src/services/authService.ts
-
-import jwt from 'jsonwebtoken';
+import { SignJWT, jwtVerify } from 'jose';
 import bcrypt from 'bcryptjs';
-import prisma from '@/lib/prisma';
+import { JWSInvalid, JWTExpired } from 'jose/errors';
+import { UnauthorizedError } from '../exceptions/UnauthorizedError';
 
-const JWT_SECRET = process.env.JWT_SECRET!;
+const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
+const SALT_ROUNDS = 10;
 
-export async function login(email: string, password: string) {
-//   const user = await prisma.user.findUnique({ where: { email } });
-//   if (!user) throw new Error('Invalid credentials');
+export const generateToken = async (userId: string) => {
+  const token = await new SignJWT({ userId })
+    .setProtectedHeader({ alg: 'HS256' })
+    .setIssuedAt()
+    .setExpirationTime('1h') // ou '1d', '2h', etc.
+    .sign(JWT_SECRET);
 
-//   const isValid = await bcrypt.compare(password, user.password);
-//   if (!isValid) throw new Error('Invalid credentials');
+  return token;
+};
 
-//   const token = generateToken(user.id);
-//   return { user, token };
-}
+export const verifyToken = async (token: string) => {
+  try {
+    const { payload } = await jwtVerify(token, JWT_SECRET, {});
+    return payload as { userId: string };
+  } catch (err) {
+    if (err instanceof JWTExpired) {
+      throw new UnauthorizedError('Token expirado');
+    }
+    if (err instanceof JWSInvalid) {
+      throw new UnauthorizedError('Token inválido');
+    }
+    throw new Error('Erro desconhecido ao verificar');
+  }
+};
 
-export function generateToken(userId: string) {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1d' });
-}
-
-export function verifyToken(token: string) {
-  return jwt.verify(token, JWT_SECRET) as { userId: string };
-}
-
-export function refreshToken(oldToken: string) {
-  const payload = verifyToken(oldToken);
+export const refreshToken = async (oldToken: string) => {
+  const payload = await verifyToken(oldToken);
   return generateToken(payload.userId);
-}
+};
+
+export const encriptPassword = async (password: string) => {
+  return bcrypt.hash(password, SALT_ROUNDS);
+};

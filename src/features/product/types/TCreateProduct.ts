@@ -1,4 +1,4 @@
-import { Product } from '@/lib/prisma/generated';
+import { Product } from '@/lib/orm/generated';
 
 type TCreateProduct = Pick<Product, 'name'> &
   Pick<Product, 'maxProduction'> &

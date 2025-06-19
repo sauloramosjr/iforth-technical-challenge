@@ -4,3 +4,32 @@
 :root{
   --teste: red;
 }
+
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  color: #000;
+}
+
+
+
+@layer utilities {
+  .animate-slide-in {
+    @apply transition-transform transform translate-x-0;
+    animation: slide-in 0.3s ease-out;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

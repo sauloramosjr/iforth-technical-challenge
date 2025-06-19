@@ -1,11 +1,11 @@
 import React from 'react';
-import { TButtonProps } from '@/components/ButtonDefault';
+import { TButtonProps } from '@/components/buttonDefault';
 
 export type TButtonIconProps = {
   Icon: () => React.ReactNode;
 } & TButtonProps;
 
-const ButtonDefault = ({ children, Icon, ...props }: TButtonIconProps) => {
+const ButtonIconDefault = ({ children, Icon, ...props }: TButtonIconProps) => {
   return (
     <div>
       <Icon />
@@ -14,4 +14,4 @@ const ButtonDefault = ({ children, Icon, ...props }: TButtonIconProps) => {
   );
 };
 
-export default ButtonDefault;
+export default ButtonIconDefault;

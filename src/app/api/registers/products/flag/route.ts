@@ -1,5 +1,5 @@
 import TUpdateProdutoFlag from '@/features/product/types/TUpdateProductFlag';
-import prisma from '@/lib/prisma';
+import orm from '@/lib/orm';
 import validateBody from '@/lib/validations/verifyAttributesRequest';
 import { NextResponse } from 'next/server';
 
@@ -17,7 +17,7 @@ export async function PUT(req: Request) {
     );
   }
 
-  const product = await prisma.product.update({
+  const product = await orm.product.update({
     where: { id: body.id },
     data: { status: body.status },
   });

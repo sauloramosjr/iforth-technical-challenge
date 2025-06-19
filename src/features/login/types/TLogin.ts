@@ -1,4 +1,4 @@
-import { User } from '@/lib/prisma/generated';
+import { User } from '@/lib/orm/generated';
 
 type TLogin = Pick<User, 'name'> & Pick<User, 'password'>;
 

@@ -1,41 +1,37 @@
+import { handleLogin } from '@/features/login/services/LoginServerService';
 import TLogin from '@/features/login/types/TLogin';
-import { generateToken } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import { BadRequestError } from '@/lib/exceptions/BadRequestError';
+import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
 import validateBody from '@/lib/validations/verifyAttributesRequest';
-import bcrypt from 'bcryptjs';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
-  const body = (await req.json()) as TLogin;
+  try {
+    const body = (await req.json()) as TLogin;
 
-  const validation = validateBody<TLogin>(body, ['name', 'password']);
+    const validation = validateBody<TLogin>(body, ['name', 'password']);
 
-  if (!validation.success) {
+    if (!validation.success) {
+      if (!validation.success) {
+        throw new BadRequestError(validation.message);
+      }
+    }
+
+    const user = await handleLogin(body.name, body.password);
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error) {
+    if (error instanceof BadRequestError) {
+      return NextResponse.json({ message: error.message }, { status: 400 });
+    }
+
+    if (error instanceof UnauthorizedError) {
+      return NextResponse.json({ message: error.message }, { status: 401 });
+    }
+
     return NextResponse.json(
-      {
-        message: validation.message,
-      },
-      { status: 400 }
+      { message: 'Erro interno do servidor' },
+      { status: 500 }
     );
   }
-
-  const usuario = await prisma.user.findUnique({
-    where: { name: body.name, password: body.password },
-  });
-
-  if (!usuario) {
-    return
-  }
-
-  const isValidPassword = await bcrypt.compare(body.name, usuario.password);
-  if (!isValidPassword) {
-    return NextResponse.json(
-      { message: 'Credenciais inválidas!' },
-      { status: 401 }
-    );
-  }
-
-  const token = generateToken(usuario.id);
-
-  return NextResponse.json({ ...usuario, token }, { status: 201 });
 }

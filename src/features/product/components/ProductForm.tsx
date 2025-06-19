@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useTransition } from 'react';
 import { createProduct } from '@/features/product/services/produtoService';
 import TCreateProduto from '../types/TCreateProduct';
+import InputDefault from '@/components/inputDefault';
+import ButtonDefault from '@/components/buttonDefault';
 
 export function ProductForm() {
   const {
@@ -26,7 +28,7 @@ export function ProductForm() {
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
         <label>Nome</label>
-        <input
+        <InputDefault
           {...register('name', { required: 'O nome é obrigatório' })}
           className="border px-3 py-2 w-full rounded"
         />
@@ -34,10 +36,9 @@ export function ProductForm() {
           <span className="text-red-500">{errors.name.message}</span>
         )}
       </div>
-
       <div>
         <label>Produção Mínima</label>
-        <input
+        <InputDefault
           type="number"
           {...register('minProduction', { required: 'Obrigatório' })}
           className="border px-3 py-2 w-full rounded"
@@ -49,7 +50,7 @@ export function ProductForm() {
 
       <div>
         <label>Produção Máxima</label>
-        <input
+        <InputDefault
           type="number"
           {...register('maxProduction', { required: 'Obrigatório' })}
           className="border px-3 py-2 w-full rounded"
@@ -59,13 +60,13 @@ export function ProductForm() {
         )}
       </div>
 
-      <button
+      <ButtonDefault
         type="submit"
         disabled={isPending}
         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
         {isPending ? 'Salvando...' : 'Salvar'}
-      </button>
+      </ButtonDefault>
     </form>
   );
 }

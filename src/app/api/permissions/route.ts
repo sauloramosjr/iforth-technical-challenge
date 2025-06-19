@@ -1,5 +1,5 @@
 import { verifyToken } from '@/lib/auth';
-import prisma from '@/lib/prisma';
+import orm from '@/lib/orm';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request) {
@@ -7,13 +7,13 @@ export async function GET(req: Request) {
   if (!token) {
     return;
   }
-  const validatedToken = verifyToken(token);
+  const validatedToken = await verifyToken(token);
 
   if (!validatedToken) {
     return;
   }
 
-  const permissions = await prisma.userPermission.findMany({
+  const permissions = await orm.userPermission.findMany({
     where: { userId: validatedToken.userId },
   });
   return NextResponse.json(permissions);

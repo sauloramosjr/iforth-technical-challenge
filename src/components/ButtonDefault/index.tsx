@@ -1,17 +1,20 @@
 import React from 'react';
-import './styles.scss';
+import './styles.css';
 
 export type TButtonProps = React.PropsWithChildren<
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >;
-const ButtonDefault = ({ children, ...props }: TButtonProps) => {
+const ButtonDefault = ({ children, className, ...props }: TButtonProps) => {
   return (
     <button
-      className="bg-blue-500 text-white rounded px-4 py-2 button-custom"
+      className={
+        className
+          ? 'button-custom ' + className
+          : 'button-custom bg-blue-500 text-white rounded px-4 py-2 w-100'
+      }
       {...props}
     >
-      {' '}
-      {children}{' '}
+      {children}
     </button>
   );
 };
