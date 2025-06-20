@@ -4,13 +4,17 @@ import React from 'react';
 
 const LayoutDashboard = ({ children }: React.PropsWithChildren) => {
   return (
-    <section className='flex min-h-screen w-full '>
-      <SidebarMenu />
-      <div  className='p-4 md:mt-1 flex-1 max-w-screen'>
-        <Breadcrumbs />
+<section className="flex max-h-screen w-full h-screen">
+  <SidebarMenu />
+  
+  <div className="flex flex-col flex-1 p-4 md:mt-1 max-w-screen overflow-hidden">
+    <Breadcrumbs />
+
+    <div className="flex-1 ">
       {children}
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
   );
 };
 

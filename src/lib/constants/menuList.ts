@@ -12,7 +12,7 @@ export const menuList:TMenuList = [
     {
         name:'Apontamentos',
         items:[{
-            name:'Apontamento de produção',
+            name:'Produção',
             path:'/dashboard/apontamentos/producao',
             icon:'/producao-icon.svg'
         }]
@@ -20,7 +20,7 @@ export const menuList:TMenuList = [
         {
         name:'Cadastros',
         items:[{
-            name:'Cadastro de produto',
+            name:'Produto',
             path:'/dashboard/cadastros/produto',
             icon:'/product-icon.svg'
         }]

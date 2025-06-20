@@ -172,7 +172,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\sources\\iforth-technical-challenge\\src\\lib\\orm\\generated",
+      "value": "D:\\projetos\\meus\\iforth-technical-challenge\\src\\lib\\orm\\generated",
       "fromEnvVar": null
     },
     "config": {
@@ -186,7 +186,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\sources\\iforth-technical-challenge\\prisma\\schema.prisma",
+    "sourceFilePath": "D:\\projetos\\meus\\iforth-technical-challenge\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {

@@ -3,17 +3,16 @@
 import { useEffect, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-import ButtonDefault from '@/components/buttonDefault';
-import InputDefault from '@/components/inputDefault';
+import ButtonDefault from '@/components/ButtonDefault';
+import InputDefault from '@/components/InputDefault';
 
+import { useNotification } from '@/components/notifications/provider';
 import { COOKIES_KEYS } from '@/lib/constants/cookieskeys';
-import { BadRequestError } from '@/lib/exceptions/BadRequestError';
-import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
+import { getErrorMessage } from '@/lib/httpClient/getErrorMessage';
+import { useRouter } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 import { signIn } from '../services/LoginUiService';
 import TLogin from '../types/TLogin';
-import { useRouter } from 'next/navigation';
-import { useNotification } from '@/components/notifications/provider';
-import { useDebouncedCallback } from 'use-debounce';
 
 export function LoginForm() {
   const {
@@ -36,12 +35,7 @@ export function LoginForm() {
           router.push('/dashboard');
         }, 1000);
       } catch (error) {
-        if (error instanceof BadRequestError) {
-          notify(error.message, 'error');
-        }
-        if (error instanceof UnauthorizedError) {
-          notify(error.message, 'error');
-        }
+            notify(getErrorMessage(error), 'error');
       }
     });
   },300);

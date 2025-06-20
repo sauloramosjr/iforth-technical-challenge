@@ -2,7 +2,7 @@
 
 import { menuList } from '@/lib/constants/menuList';
 import { useState } from 'react';
-import ButtonDefault from '../buttonDefault';
+import ButtonDefault from '../ButtonDefault';
 import MenuItems from './menuItems';
 
 const SidebarMenu = () => {

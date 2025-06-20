@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { verifyToken } from './lib/auth';
 import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
 
-const publicRoutes = ['/api/login'];
+const publicRoutes = ['/api/login','/'];
 const isPublicRoute = (pathname: string) => publicRoutes.includes(pathname);
 
 export async function middleware(request: NextRequest) {
