@@ -1,5 +1,5 @@
-import { THttpResponsePaginated } from '@/types/THttpResponsePaginated';
-import httpClient from './';
+import { THttpResponsePaginated } from '@/types/THttpResponse';
+import axiosInstance from './axiosInstance';
 
 type ApiResponse<T> = {
   data: T;
@@ -8,7 +8,7 @@ type ApiResponse<T> = {
 };
 
 const Get = async <T = any>(url: string, params?: any): Promise<ApiResponse<THttpResponsePaginated<T>>> => {
-  const response = await httpClient.get<THttpResponsePaginated<T>>(url, { params });
+  const response = await axiosInstance.get<THttpResponsePaginated<T>>(url, { params });
   return {
     data: response.data,
     status: response.status,
@@ -17,7 +17,7 @@ const Get = async <T = any>(url: string, params?: any): Promise<ApiResponse<THtt
 };
 
 const Post = async <T = any>(url: string, body?: any): Promise<ApiResponse<T>> => {
-  const response = await httpClient.post<T>(url, body);
+  const response = await axiosInstance.post<T>(url, body);
   return {
     data: response.data,
     status: response.status,
@@ -26,7 +26,7 @@ const Post = async <T = any>(url: string, body?: any): Promise<ApiResponse<T>> =
 };
 
 const Put = async <T = any>(url: string, body?: any): Promise<ApiResponse<T>> => {
-  const response = await httpClient.put<T>(url, body);
+  const response = await axiosInstance.put<T>(url, body);
   return {
     data: response.data,
     status: response.status,
@@ -35,7 +35,7 @@ const Put = async <T = any>(url: string, body?: any): Promise<ApiResponse<T>> =>
 };
 
 const Delete = async <T = any>(url: string): Promise<ApiResponse<T>> => {
-  const response = await httpClient.delete<T>(url);
+  const response = await axiosInstance.delete<T>(url);
   return {
     data: response.data,
     status: response.status,

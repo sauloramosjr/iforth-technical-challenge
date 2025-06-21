@@ -1,7 +1,6 @@
-import { SignJWT, jwtVerify } from 'jose';
 import bcrypt from 'bcryptjs';
-import { JWSInvalid, JWTExpired } from 'jose/errors';
-import { UnauthorizedError } from '../exceptions/UnauthorizedError';
+import { SignJWT, jwtVerify } from 'jose';
+import { exceptions } from '../exceptions/exceptions';
 
 const JWT_SECRET = new TextEncoder().encode(process.env.JWT_SECRET!);
 const SALT_ROUNDS = 10;
@@ -10,7 +9,7 @@ export const generateToken = async (userId: string) => {
   const token = await new SignJWT({ userId })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('1h') // ou '1d', '2h', etc.
+    .setExpirationTime('20s') // ou '1d', '2h', etc.
     .sign(JWT_SECRET);
 
   return token;
@@ -21,19 +20,17 @@ export const verifyToken = async (token: string) => {
     const { payload } = await jwtVerify(token, JWT_SECRET, {});
     return payload as { userId: string };
   } catch (err) {
-    if (err instanceof JWTExpired) {
-      throw new UnauthorizedError('Token expirado');
-    }
-    if (err instanceof JWSInvalid) {
-      throw new UnauthorizedError('Token inválido');
-    }
-    throw new Error('Erro desconhecido ao verificar');
+     throw exceptions(err);
   }
 };
 
 export const refreshToken = async (oldToken: string) => {
-  const payload = await verifyToken(oldToken);
-  return generateToken(payload.userId);
+    try {
+    const payload = await verifyToken(oldToken);
+    return generateToken(payload.userId);
+  } catch (err) {
+     throw exceptions(err);
+  }
 };
 
 export const encriptPassword = async (password: string) => {

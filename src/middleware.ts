@@ -1,9 +1,11 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { verifyToken } from './lib/auth';
-import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
+import { UnauthorizedError } from './lib/exceptions/http/UnauthorizedError';
+import { JwtExpiredError } from './lib/exceptions/jwt/JwtExpiredError';
+import { JwtInvalidError } from './lib/exceptions/jwt/JwtInvalidError';
+import tokenMiddleWare from './lib/validations/tokenValidation';
 
-const publicRoutes = ['/api/login','/'];
+const publicRoutes = ['/api/login','/*'];
 const isPublicRoute = (pathname: string) => publicRoutes.includes(pathname);
 
 export async function middleware(request: NextRequest) {
@@ -19,28 +21,15 @@ if (request.method === 'OPTIONS') {
     await tokenMiddleWare(request);
     return NextResponse.next();
   } catch (error) {
-    if (error instanceof UnauthorizedError) {
+    if (error instanceof UnauthorizedError || error instanceof JwtExpiredError|| error instanceof JwtInvalidError ) {
       return NextResponse.redirect(new URL('/?errorMessage='+error.message, request.url))
     }
 
-    return NextResponse.json({ message: 'Erro de Servidor.' }, { status: 500 });
+    return NextResponse.json({ message: error }, { status: 500 });
   }
 }
 
-const tokenMiddleWare = async (request: NextRequest) => {
-  const token = request.cookies.get('auth_token')?.value;
-  if (!token) {
-    throw new UnauthorizedError('Não autorizado. Token não encontrado.');
-  }
-  try {
-   await verifyToken(token);
-  } catch (error: unknown) {
-    if(error instanceof UnauthorizedError){
-      throw error;
-    }
-    throw new Error((error as Error).message)
-  }
-};
+
 export const config = {
   matcher: ['/api/:path*', '/dashboard/:path*'],
 };

@@ -1,5 +1,5 @@
-import { User } from '@/lib/orm/generated';
+import { TUser } from '@/types/TUser';
 
-type TLogin = Pick<User, 'name'> & Pick<User, 'password'>;
+type TLogin = Pick<TUser, 'name'> & Pick<TUser, 'password'>;
 
 export default TLogin;

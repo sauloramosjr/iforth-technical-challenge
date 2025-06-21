@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const httpClient = axios.create({
+const axiosInstance = axios.create({
   withCredentials: true, 
   timeout: 10000, 
 });
 
 
 
-export default httpClient;
+export default axiosInstance;

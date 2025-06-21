@@ -1,5 +1,5 @@
 import { generateToken } from '@/lib/auth';
-import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
+import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
 import { UserRepository } from '@/lib/repository/UserRepository';
 import bcrypt from 'bcryptjs';
 

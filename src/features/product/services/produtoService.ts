@@ -1,7 +1,7 @@
-import apiClient from '@/lib/httpClient/httpClient';
-import TCreateProduct from '../types/TCreateProduct';
-import handleError from '@/lib/exceptions/HandleError';
+import { exceptions } from '@/lib/exceptions/exceptions';
+import apiClient from '@/lib/httpClient';
 import { Product } from '@/lib/orm/generated';
+import TCreateProduct from '../types/TCreateProduct';
 import TUpdateProduct from '../types/TUpdateProduct';
 
 const getAll = async ({ page, limit }: { page: string; limit: string }) => {
@@ -16,7 +16,7 @@ const getAll = async ({ page, limit }: { page: string; limit: string }) => {
     );
     return data;
   } catch (error) {
-    throw handleError(error);
+    throw exceptions(error);
   }
 };
 const getOne = async (id: string) => {
@@ -26,7 +26,7 @@ const getOne = async (id: string) => {
     );
     return data;
   } catch (error) {
-    handleError(error);
+    exceptions(error);
   }
 };
 const create = async (dto: TCreateProduct) => {
@@ -34,7 +34,7 @@ const create = async (dto: TCreateProduct) => {
     const { data } = await apiClient.Post('/api/registers/products', dto);
     return data;
   } catch (error) {
-    handleError(error);
+    exceptions(error);
   }
 };
 const update = async (dto: TUpdateProduct) => {
@@ -42,7 +42,7 @@ const update = async (dto: TUpdateProduct) => {
     const { data } = await apiClient.Post('/api/registers/products', dto);
     return data;
   } catch (error) {
-    handleError(error);
+    exceptions(error);
   }
 };
 

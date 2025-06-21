@@ -1,10 +1,10 @@
 
-import { HttpError } from './HttpError';
+import { BaseError } from '../BaseError';
 
-export class ApiError extends HttpError {
+export class ApiError extends BaseError {
   status: number;
   constructor(message: string, status: number) {
-    super(status,message);
+    super(message,status);
     this.name = 'ApiError';
     this.status = status;
   }

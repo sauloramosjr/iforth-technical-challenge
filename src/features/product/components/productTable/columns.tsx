@@ -1,4 +1,4 @@
-import ButtonDefault from '@/components/ButtonDefault';
+import ButtonDefault from '@/components/buttonDefault';
 import { Product } from '@/lib/orm/generated';
 import { StatusEnum } from '../../enums/status';
 

@@ -1,16 +1,14 @@
-// src/lib/repositories/UserRepository.ts
-
-import TUserCreate from '@/types/TUserCreate';
+import { TUser, TUserCreate } from '@/types/TUser';
 import orm from '../orm';
-import { Prisma, User } from '../orm/generated';
+import { Prisma } from '../orm/generated';
 
-const findOne = (where: Prisma.UserWhereUniqueInput): Promise<User | null> => {
+const findOne = (where: Prisma.UserWhereUniqueInput): Promise<TUser | null> => {
   return orm.user.findUnique({ where });
 };
 
 const findOneWithPermissions = (
   where: Prisma.UserWhereUniqueInput
-): Promise<(User & { permissions: any[] }) | null> => {
+): Promise<(TUser & { permissions: any[] }) | null> => {
   return orm.user.findUnique({
     where,
     include: {
@@ -19,22 +17,22 @@ const findOneWithPermissions = (
   });
 };
 
-const create = (data: TUserCreate): Promise<User> => {
+const create = (data: TUserCreate): Promise<TUser> => {
   return orm.user.create({ data });
 };
 
 const update = (
   where: Prisma.UserWhereUniqueInput,
   data: Prisma.UserUpdateInput
-): Promise<User> => {
+): Promise<TUser> => {
   return orm.user.update({ where, data });
 };
 
-const remove = (where: Prisma.UserWhereUniqueInput): Promise<User> => {
+const remove = (where: Prisma.UserWhereUniqueInput): Promise<TUser> => {
   return orm.user.delete({ where });
 };
 
-const list = (where?: Prisma.UserWhereInput): Promise<User[]> => {
+const list = (where?: Prisma.UserWhereInput): Promise<TUser[]> => {
   return orm.user.findMany({ where });
 };
 

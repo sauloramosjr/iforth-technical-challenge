@@ -1,4 +1,4 @@
-import ButtonDefault from '@/components/ButtonDefault';
+import ButtonDefault from '@/components/buttonDefault';
 import { DataTable } from '@/components/tableDefault';
 import React from 'react';
 import { columns } from './columns';

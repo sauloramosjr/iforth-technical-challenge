@@ -1,5 +1,5 @@
 import React from 'react';
-import { TButtonProps } from '@/components/buttonDefault';
+import { TButtonProps } from '../buttonDefault';
 
 export type TButtonIconProps = {
   Icon: () => React.ReactNode;

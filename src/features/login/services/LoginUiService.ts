@@ -1,27 +1,17 @@
-import { BadRequestError } from '@/lib/exceptions/BadRequestError';
-import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
 import httpClient from '@/lib/httpClient';
-import TUserWithToken from '@/types/TUserWithToken';
-import { AxiosError, AxiosResponse } from 'axios';
+import { AxiosError } from 'axios';
 import TLogin from '../types/TLogin';
+import { TUserWithToken } from '@/types/TUser';
+import { exceptions } from '@/lib/exceptions/exceptions';
 
 export const signIn = async (login: TLogin) => {
   try {
-    const response = await httpClient.post<
-      TUserWithToken,
-      AxiosResponse<TUserWithToken>,
-      TLogin
-    >('/api/login', login);
+    const response = await httpClient.Post<TUserWithToken>('/api/login', login);
 
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      if (error.response?.status === 400) {
-        throw new BadRequestError(error.response.data.message);
-      }
-      if (error.response?.status === 401) {
-        throw new UnauthorizedError(error.response.data.message);
-      }
+      exceptions(error.response?.data.message);
     }
     throw new Error('Erro inesperado');
   }

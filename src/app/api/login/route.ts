@@ -1,8 +1,8 @@
 import { handleLogin } from '@/features/login/services/LoginServerService';
 import TLogin from '@/features/login/types/TLogin';
-import { BadRequestError } from '@/lib/exceptions/BadRequestError';
-import { UnauthorizedError } from '@/lib/exceptions/UnauthorizedError';
-import validateBody from '@/lib/validations/verifyAttributesRequest';
+import { BadRequestError } from '@/lib/exceptions/http/BadRequestError';
+import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
+import validateBody from '@/lib/validations/attributesRequestValidation';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
