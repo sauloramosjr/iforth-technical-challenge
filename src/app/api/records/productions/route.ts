@@ -33,7 +33,7 @@ export async function GET(req: NextRequest) {
     where.quantityProduced = { gte: parseFloat(filters.quantityProduced) };
   }
   if (filters.product) {
-    where.productId = { contains: filters.product, mode: 'insensitive' };
+    where.productId = { equals: filters.product, mode: 'insensitive' };
   }
   if (filters.justification) {
     where.justification = {

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { columns } from './columns';
 import { TProduction, TProductionWithProduct } from '../../types/TProduction';
 import DialogDefault from '@/components/confirmDialog';
+import { Portal } from '@/components/portal';
 
 const ProductionTable = ({
   productions,
@@ -59,14 +60,26 @@ const ProductionTable = ({
           </>
         )}
       />
-      <DialogDefault
-        onConfirm={() => setProductionSelected(undefined)}
-        message=""
-        open={!!productionSelected}
-      >
-        <h2>Justificativa</h2>
-        <p>{productionSelected?.justification}</p>
-      </DialogDefault>
+      <Portal>
+        <div
+          id="menu-actions"
+          className="absolute z-50"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+          }}
+        >
+          <DialogDefault
+            onConfirm={() => setProductionSelected(undefined)}
+            message=""
+            open={!!productionSelected}
+          >
+            <h2>Justificativa</h2>
+            <p>{productionSelected?.justification}</p>
+          </DialogDefault>
+        </div>
+      </Portal>
     </>
   );
 };

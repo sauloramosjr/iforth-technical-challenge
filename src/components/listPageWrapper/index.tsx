@@ -115,12 +115,13 @@ export function ListPageWrapper<T>({
   const handleChangeFilter = (key: string, value: string) => {
     const _params = new URLSearchParams(searchParams.toString());
 
-    if (value || value !== 'todos') {
+    if (value ) {
       _params.set(`filter[${key}]`, value);
     } else {
       _params.delete(`filter[${key}]`);
     }
     _params.set('page', '1');
+    console.log(params)
     setParams(_params.toString());
   };
 

@@ -20,11 +20,14 @@ export async function GET(req: NextRequest) {
       filters[field] = value;
     }
   });
-
+console.log(filters)
   const where: Prisma.ProductWhereInput = {};
 
   if (filters.status) {
     where.status = filters.status as Status;
+  }
+  if (filters.name) {
+       where.name = { contains: filters.name, mode: 'insensitive' };
   }
   if (filters.maxProduction) {
     where.maxProduction = { gte: parseFloat(filters.maxProduction) };
