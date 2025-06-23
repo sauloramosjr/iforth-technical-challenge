@@ -3,7 +3,7 @@ import { menuList } from '@/lib/constants/menuList';
 import React from 'react';
 
 
-const Cadastro = ({ children }: React.PropsWithChildren) => {
+const Cadastro = () => {
   const items = menuList.find((e) => e.name == 'Cadastros')!.items;
   return (
     <div className="p-5 ">

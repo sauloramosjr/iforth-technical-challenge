@@ -1,13 +1,18 @@
 import { ProductionRepository } from '@/features/production/repository';
 import { BaseError } from '@/lib/exceptions/BaseError';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-type RouteParams = {
-  params: { id: string };
-};
 
-export async function GET(_req: Request, { params }: RouteParams) {
-  const { id } = params;
+
+export async function GET(_req: NextRequest) {
+  const id  = _req.nextUrl.searchParams.get('id');
+
+      if (!id) {
+      return NextResponse.json(
+        { message: 'Id necessário!' },
+        { status: 400 }
+      );
+    }
 
   try {
     const production = await ProductionRepository.findOne({

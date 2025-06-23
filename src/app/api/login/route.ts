@@ -1,11 +1,15 @@
+export const runtime = 'nodejs';
 import { handleLogin } from '@/features/login/services/loginServerService';
 import TLogin from '@/features/login/types/TLogin';
 import { BadRequestError } from '@/lib/exceptions/http/BadRequestError';
 import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
 import validateBody from '@/lib/validations/attributesRequestValidation';
+import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
+  (await cookies()).delete('auth_token');
+
   try {
     const body = (await req.json()) as TLogin;
 

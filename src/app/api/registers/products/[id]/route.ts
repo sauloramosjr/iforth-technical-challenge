@@ -1,13 +1,13 @@
 import { ProductRepository } from '@/features/product/repository';
 import { BaseError } from '@/lib/exceptions/BaseError';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-type RouteParams = {
-  params: { id: string };
-};
+export async function GET(_req: NextRequest) {
+  const id = _req.nextUrl.searchParams.get('id');
 
-export async function GET(_req: Request, { params }: RouteParams) {
-  const { id } = params;
+  if (!id) {
+    return NextResponse.json({ message: 'Id necessário!' }, { status: 400 });
+  }
 
   try {
     const production = await ProductRepository.findOne({
@@ -15,9 +15,9 @@ export async function GET(_req: Request, { params }: RouteParams) {
       select: {
         id: true,
         status: true,
-        name:true,
-        minProduction:true,
-        maxProduction:true,
+        name: true,
+        minProduction: true,
+        maxProduction: true,
         createdAt: true,
         updatedAt: true,
         createdBy: {
@@ -32,7 +32,6 @@ export async function GET(_req: Request, { params }: RouteParams) {
             name: true,
           },
         },
-
       },
     });
 
@@ -43,7 +42,11 @@ export async function GET(_req: Request, { params }: RouteParams) {
       );
     }
 
-    return NextResponse.json({data:production,status:200, statusText:'Success'});
+    return NextResponse.json({
+      data: production,
+      status: 200,
+      statusText: 'Success',
+    });
   } catch (error) {
     if (error instanceof BaseError) {
       return NextResponse.json(
