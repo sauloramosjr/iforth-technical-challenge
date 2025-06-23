@@ -29,13 +29,12 @@ export default function SelectFilter({
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Atualiza o texto visível quando o value muda (ex: ao carregar o form)
   useEffect(() => {
+    // Sempre que o valor externo mudar, atualize o texto exibido
     const label = options.find((opt) => opt.value === value)?.label || '';
     setInputValue(label);
   }, [value, options]);
 
-  // Fecha o dropdown ao clicar fora
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -50,33 +49,21 @@ export default function SelectFilter({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleInputChange = (val: string) => {
+    setInputValue(val);
+    setShowOptions(true);
+  };
+
   const handleSelect = (option: Option) => {
     setInputValue(option.label);
     setShowOptions(false);
     onChange(option.value);
   };
 
-  const handleInputChange = (val: string) => {
-    setInputValue(val);
-    setShowOptions(true);
-
-    const matchedOption = options.find(
-      (opt) => opt.label.toLowerCase() === val.toLowerCase()
-    );
-
-    if (matchedOption) {
-      onChange(matchedOption.value);
-    } else {
-      onChange('');
-    }
-  };
-
-  // Opções com a selecionada primeiro
-  const sortedOptions = (() => {
-    const selected = options.find((opt) => opt.value === value);
-    const others = options.filter((opt) => opt.value !== value);
-    return selected ? [selected, ...others] : options;
-  })();
+  // Filtrar opções por label digitado (case-insensitive)
+  const filteredOptions = options.filter((opt) =>
+    opt.label.toLowerCase().includes(inputValue.toLowerCase())
+  );
 
   return (
     <div className={`relative w-full ${className}`} ref={containerRef}>
@@ -92,9 +79,9 @@ export default function SelectFilter({
         }}
       />
 
-      {showOptions && (
+      {showOptions && filteredOptions.length > 0 && (
         <div className="absolute z-[99] mt-1 w-full max-h-60 overflow-auto rounded-md border bg-white shadow-md">
-          {sortedOptions.map((option) => (
+          {filteredOptions.map((option) => (
             <div
               key={option.value}
               className={`cursor-pointer px-3 py-2 hover:bg-blue-100 ${
@@ -105,6 +92,12 @@ export default function SelectFilter({
               {option.label}
             </div>
           ))}
+        </div>
+      )}
+
+      {showOptions && filteredOptions.length === 0 && (
+        <div className="absolute z-[99] mt-1 w-full rounded-md border bg-white shadow-md p-2 text-gray-500">
+          Nenhum resultado encontrado.
         </div>
       )}
     </div>
