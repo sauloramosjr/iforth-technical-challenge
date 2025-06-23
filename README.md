@@ -36,8 +36,6 @@ Senha: famosaSenha123
 ```bash 
 npm install
 ```
-#### ou
-yarn install
 2. Configure o banco de dados:
 Caso necessário, rode as migrations Prisma para criar as tabelas:
 ```bash
