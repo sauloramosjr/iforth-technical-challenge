@@ -1,16 +1,28 @@
 import React from 'react';
-import { TButtonProps } from '../buttonDefault';
+import ButtonDefault, { TButtonProps } from '../buttonDefault';
 
 export type TButtonIconProps = {
   Icon: () => React.ReactNode;
 } & TButtonProps;
 
-const ButtonIconDefault = ({ children, Icon, ...props }: TButtonIconProps) => {
+const ButtonIconDefault = ({
+  children,
+  Icon,
+  className,
+  ...props
+}: TButtonIconProps) => {
   return (
-    <div>
+    <ButtonDefault
+      {...props}
+      className={
+        className
+          ? 'button-custom ' + className
+          : 'button-custom flex gap-2 bg-blue-500 text-white rounded px-4 py-2 hover:bg-sky-700'
+      }
+    >
       <Icon />
-      <button {...props}> {children} </button>;
-    </div>
+      {children}
+    </ButtonDefault>
   );
 };
 

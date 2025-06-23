@@ -1,57 +1,102 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState, useTransition } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
-import { useNotification } from '@/components/notifications/provider';
+import { ListPageWrapper } from '@/components/listPageWrapper';
+import ProductFilters from '@/features/product/components/productFilters';
 import ProductTable from '@/features/product/components/productTable';
 import produtoService from '@/features/product/services/produtoService';
+import { TProduct, TProductWithreatedBy } from '@/features/product/types/TProduct';
+import { useNotification } from '@/components/notifications/provider';
 import { getErrorMessage } from '@/lib/httpClient/getErrorMessage';
-import { Product } from '@/lib/orm/generated';
-import { THttpResponsePaginated } from '@/types/THttpResponsePaginated';
-import Pagination from '@/components/pagination';
+import { useState } from 'react';
 
 const ProductsPage = () => {
-  const searchParams = useSearchParams();
+  const router = useRouter();
   const { notify } = useNotification();
-
-  const [products, setProducts] = useState<Product[] | null>(null);
-  const [isPending, startTransition] = useTransition();
-  const [meta, setMeta] = useState<
-    THttpResponsePaginated<Product[]>['meta'] | null
-  >(null);
-
-  const fetchProducts = async () => {
-    const page = searchParams.get('page') || '';
-    const limit = searchParams.get('limit') || '';
-
+  const [dataChanged, setDataChanged] = useState<TProduct>();
+  const [sortedColumn, setSortedColumn] = useState<{
+    key: string;
+    direction: 'asc' | 'desc' | '';
+  }>({
+    key: 'createdAt',
+    direction: 'desc',
+  });
+  const fetchProducts = async ({
+    page,
+    limit,
+    filters,
+    select,
+    sort,
+  }: {
+    page: string;
+    limit: string;
+    filters: Record<string, string>;
+    select?: (keyof TProductWithreatedBy)[];
+    sort?: string;
+  }) => {
     try {
-      const result = await produtoService.getAll({ page, limit });
-      setProducts(result.data);
-      setMeta(result.meta);
-      console.log(result.meta);
-    } catch (err) {
-      notify(getErrorMessage(err), 'error');
+      return await produtoService.getAll({
+        page,
+        limit,
+        filters,
+        select: select || [
+          'id',
+          'status',
+          'name',
+          'maxProduction',
+          'minProduction',
+        ],
+        sort:  `${sortedColumn.key}:${sortedColumn.direction}`,
+      });
+    } catch (error) {
+      notify(getErrorMessage(error), 'error');
+      return {
+        data: [],
+        meta: { total: 0, page: 1, limit: 10, totalPages: 1 },
+      };
     }
   };
 
-  useEffect(() => {
-    startTransition(fetchProducts);
-  }, [searchParams]);
+  const handleChangeStatus = useDebouncedCallback(
+    async (id: string, status: TProduct['status']) => {
+      try {
+        const prod = await produtoService.changeStatus({ id, status });
+        setDataChanged(prod);
+        notify(`Produto: ${prod.name} foi alterado com sucesso`, 'success');
+      } catch (error) {
+        notify(getErrorMessage(error), 'error');
+      }
+    },
+    500
+  );
+
+  const handleSortChange = (key: string, direction: 'asc' | 'desc' | '') => {
+    setSortedColumn({ key, direction });
+  };
 
   return (
-    <div className="flex flex-col bg-white shadow-sm rounded border h-fit">
-      <ProductTable isPending={isPending} products={products} />
-      {meta && (
-        <div className="border-t p-4">
-          <Pagination
-            page={meta.page}
-            totalPages={meta.totalPages}
-            limit={meta.limit}
-          />
-        </div>
+    <ListPageWrapper
+      sort={`${sortedColumn.key}:${sortedColumn.direction}`}
+      dataChanged={dataChanged}
+      fetchData={fetchProducts}
+      FiltersComponent={({ onChangeFilter, searchParams }) => (
+        <ProductFilters
+          searchParams={searchParams}
+          onChangeFilter={onChangeFilter}
+        />
       )}
-    </div>
+      tableComponent={(data, isPending) => (
+        <ProductTable
+          isPending={isPending}
+          products={data}
+          handleChangeStatus={handleChangeStatus}
+          onSortChange={handleSortChange}
+        />
+      )}
+      onAdd={() => router.push('/dashboard/cadastros/produto/adicionar')}
+    />
   );
 };
 

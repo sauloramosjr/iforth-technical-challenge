@@ -134,6 +134,8 @@ exports.Prisma.ProductScalarFieldEnum = {
   minProduction: 'minProduction',
   maxProduction: 'maxProduction',
   status: 'status',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -144,6 +146,8 @@ exports.Prisma.ProductionEntryScalarFieldEnum = {
   quantityProduced: 'quantityProduced',
   status: 'status',
   justification: 'justification',
+  createdById: 'createdById',
+  updatedById: 'updatedById',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

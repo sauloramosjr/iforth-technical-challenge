@@ -3,24 +3,24 @@
 import { useEffect, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
-
-
 import { useNotification } from '@/components/notifications/provider';
-import { COOKIES_KEYS } from '@/lib/constants/cookieskeys';
+import { StorageKeys } from '@/lib/constants/cookieskeys';
 import { getErrorMessage } from '@/lib/httpClient/getErrorMessage';
 import { useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
-import { signIn } from '../services/LoginUiService';
+import { signIn } from '../services/loginUiService';
 import TLogin from '../types/TLogin';
 import InputDefault from '@/components/inputDefault';
-import ButtonDefault from '@/components/buttonDefault';
+import ButtonDefault, {
+  buttonDefaultClassesBase,
+} from '@/components/buttonDefault';
 
 export function LoginForm() {
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty, touchedFields, isSubmitted },
   } = useForm<TLogin>();
 
   const [isPending, startTransition] = useTransition();
@@ -30,61 +30,68 @@ export function LoginForm() {
     startTransition(async () => {
       try {
         const user = await signIn(data);
-        document.cookie = `${COOKIES_KEYS.AUTH_TOKEN}=${user.token};`;
+        localStorage.setItem(StorageKeys.AUTH_TOKEN,user.token)
+        document.cookie = `${StorageKeys.AUTH_TOKEN}=${user.token};`;
         notify('Bem vindo: ' + user.name, 'success');
         setTimeout(() => {
           router.push('/dashboard');
         }, 1000);
       } catch (error) {
-            notify(getErrorMessage(error), 'error');
+        notify(getErrorMessage(error), 'error');
       }
     });
-  },300);
+  }, 300);
 
   useEffect(() => {
-    if (errors.name) {
-      notify(errors.name?.message + '', 'error');
-    }
-  }, [errors.name]);
+    const errs: string[] = [];
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
 
-  useEffect(() => {
-    if (errors.password) {
-      notify(errors.password?.message + '', 'error');
-    }
-  }, [errors.password]);
+        errs.push(error.message as string);
+      }
+    });
+     isSubmitted && errs.length > 0 && notify(errs.join('\n'), 'error');
+  }, [errors, isSubmitted]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" autoComplete="on">
-      <div>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="space-y-4"
+      autoComplete="on"
+    >
+      <div className="flex flex-col gap-0">
         <label>Nome</label>
         <InputDefault
-        id={'inputName'}
-        autoComplete="username"
-        type='text'
-        
-        className={errors.name && 'border-red-500'}
-        {...register('name', { required: 'O nome é obrigatório' })}
+          id={'inputName'}
+          autoComplete="username"
+          type="text"
+          error={!!errors.name}
+          {...register('name', { required: 'O nome é obrigatório' })}
         />
         {errors.name && (
-            <span className="text-red-500">{errors.name.message}</span>
+          <span className="text-red-500">{errors.name.message}</span>
         )}
       </div>
 
-      <div>
+      <div className="flex flex-col gap-0">
         <label>Senha</label>
         <InputDefault
-        id={'inputPassword'}
-        autoComplete="current-password"
-        type='password'
-          className={errors.password && 'border-red-500'}
+          id={'inputPassword'}
+          autoComplete="current-password"
+          type="password"
+          error={!!errors.password}
           {...register('password', { required: 'A senha é obrigatória' })}
-          />
+        />
         {errors.password && (
-            <span className="text-red-500">{errors.password.message}</span>
+          <span className="text-red-500">{errors.password.message}</span>
         )}
       </div>
 
-      <ButtonDefault type="submit" disabled={isPending}>
+      <ButtonDefault
+        className={buttonDefaultClassesBase + ' w-full'}
+        type="submit"
+        disabled={isPending}
+      >
         {isPending ? 'Carregando...' : 'Entrar'}
       </ButtonDefault>
     </form>

@@ -1,28 +1,21 @@
-import { generateToken } from '@/lib/auth';
+import { decriptPassword, encriptPassword, generateToken } from '@/lib/auth';
 import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
 import { UserRepository } from '@/lib/repository/UserRepository';
-import bcrypt from 'bcryptjs';
 
 export const handleLogin = async (name: string, password: string) => {
-    const user = await UserRepository.findOne({ name });
-    
-    const errorMessage = 'Usuário ou senha inválidos'
-    if (!user) {
-        throw new UnauthorizedError(errorMessage);
-  }
+  const user = await UserRepository.findOne({ name });
 
-  const isValidPassword = await bcrypt.compare(password, user.password);
+  const errorMessage = 'Usuário ou senha inválidos';
+  if (!user) {
+    throw new UnauthorizedError(errorMessage);
+  }
+  const isValidPassword = await decriptPassword(password, user.password);
   if (!isValidPassword) {
     throw new UnauthorizedError(errorMessage);
   }
 
   const token = await generateToken(user.id);
-  const {
-    password: _p,
-    createdAt: _c,
-    updatedAt: _u,
-    ..._user
-  } = user;
+  const { password: _p, createdAt: _c, updatedAt: _u, ..._user } = user;
 
   return { ..._user, token };
 };

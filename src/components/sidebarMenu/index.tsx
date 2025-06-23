@@ -4,9 +4,29 @@ import { menuList } from '@/lib/constants/menuList';
 import { useState } from 'react';
 import ButtonDefault from '../buttonDefault';
 import MenuItems from './menuItems';
+import { useRouter } from 'next/navigation';
+import DialogDefault from '../confirmDialog';
+import { useNotification } from '../notifications/provider';
+import { signOut } from '@/features/login/services/loginUiService';
 
 const SidebarMenu = () => {
+  const {notify} = useNotification()
   const [isOpen, setIsOpen] = useState(false);
+  const [openedDialog, setOpenedDialog] = useState(false);
+  const router = useRouter();
+
+  const openDialog=()=>{
+    setOpenedDialog(true)
+  }
+  const closeDialog=()=>{
+    setOpenedDialog(false)
+  }
+  const _signOut = async() => {
+    closeDialog()
+    notify('Saindo, até mais!')
+    await signOut()
+    router.push('/');
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -21,13 +41,13 @@ const SidebarMenu = () => {
         <ButtonDefault
           onClick={toggleMenu}
           aria-label="Toggle Menu"
-          className="flex flex-col gap-1"
+          className="flex flex-col gap-1 focus:ring-0"
         >
           {isOpen ? (
             // Ícone de "X"
             <div className="relative w-6 h-6">
-              <span className="absolute top-1/2 right-1 w-6 h-0.5 bg-black rotate-45" />
-              <span className="absolute top-1/2 right-1 w-6 h-0.5 bg-black -rotate-45" />
+              <span className="absolute top-1/2 right-0 w-6 h-0.5 bg-black rotate-45" />
+              <span className="absolute top-1/2 right-0 w-6 h-0.5 bg-black -rotate-45" />
             </div>
           ) : (
             // Ícone Hamburguer
@@ -60,8 +80,18 @@ const SidebarMenu = () => {
             );
           })}
         </div>
-        <div>oi</div>
+        <div>
+          <ButtonDefault onClick={openDialog}>Sair</ButtonDefault>
+        </div>
       </aside>
+      <DialogDefault
+      message='Tem certeza que quer sair?'
+      open={openedDialog}
+      onConfirm={_signOut}
+      onCancel={closeDialog}
+      >
+
+      </DialogDefault>
 
       {/* Overlay no mobile */}
       {isOpen && (

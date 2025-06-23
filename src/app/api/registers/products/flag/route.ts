@@ -1,9 +1,11 @@
-import TUpdateProdutoFlag from '@/features/product/types/TUpdateProductFlag';
 import orm from '@/lib/orm';
-import validateBody from '@/lib/validations/verifyAttributesRequest';
-import { NextResponse } from 'next/server';
+import validateBody from '@/lib/validations/attributesRequestValidation';
+import { NextRequest, NextResponse } from 'next/server';
+import TUpdateProdutoFlag from '@/features/product/types/TProduct';
+import { ProductRepository } from '@/features/product/repository';
+import { verifyToken } from '@/lib/auth';
 
-export async function PUT(req: Request) {
+export async function PUT(req: NextRequest) {
   const body = (await req.json()) as TUpdateProdutoFlag;
   const validation = validateBody<TUpdateProdutoFlag>(body, ['id', 'status']);
 
@@ -16,10 +18,12 @@ export async function PUT(req: Request) {
       { status: 400 }
     );
   }
+  const token = (req.cookies.get('auth_token')?.value + '') || req.headers.get("Authorizarion")+'';
+  const { userId } = await verifyToken(token);
 
-  const product = await orm.product.update({
-    where: { id: body.id },
-    data: { status: body.status },
-  });
+
+  const product = await ProductRepository.update({data:{status:body.status, updatedBy:userId},where:{
+  id:body.id
+  }});
   return NextResponse.json(product, { status: 201 });
 }

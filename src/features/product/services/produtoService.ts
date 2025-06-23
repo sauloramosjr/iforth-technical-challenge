@@ -1,54 +1,8 @@
-import { exceptions } from '@/lib/exceptions/exceptions';
-import apiClient from '@/lib/httpClient';
-import { Product } from '@/lib/orm/generated';
-import TCreateProduct from '../types/TCreateProduct';
-import TUpdateProduct from '../types/TUpdateProduct';
+import crudServiceFactory from '@/lib/factorys/crudServiceFactory';
+import TUpdateProductFlag, { TProduct, TProductCreate, TProductUpdate, TProductWithreatedBy, } from '../types/TProduct';
 
-const getAll = async ({ page, limit }: { page: string; limit: string }) => {
-  let params = '';
-  if (page && limit) {
-    params = `?page=${page}&limit=${limit}`;
-  }
+const productService = crudServiceFactory<TProductWithreatedBy, TProductCreate, TProductUpdate, TUpdateProductFlag>(
+  '/api/registers/products'
+);
 
-  try {
-    const { data } = await apiClient.Get<Product[]>(
-      '/api/registers/products' + params
-    );
-    return data;
-  } catch (error) {
-    throw exceptions(error);
-  }
-};
-const getOne = async (id: string) => {
-  try {
-    const { data } = await apiClient.Get<Product[]>(
-      '/api/registers/products/' + id
-    );
-    return data;
-  } catch (error) {
-    exceptions(error);
-  }
-};
-const create = async (dto: TCreateProduct) => {
-  try {
-    const { data } = await apiClient.Post('/api/registers/products', dto);
-    return data;
-  } catch (error) {
-    exceptions(error);
-  }
-};
-const update = async (dto: TUpdateProduct) => {
-  try {
-    const { data } = await apiClient.Post('/api/registers/products', dto);
-    return data;
-  } catch (error) {
-    exceptions(error);
-  }
-};
-
-export default {
-  getAll,
-  create,
-  getOne,
-  update,
-};
+export default productService;

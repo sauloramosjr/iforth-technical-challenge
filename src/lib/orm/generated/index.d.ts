@@ -1251,10 +1251,18 @@ export namespace Prisma {
 
   export type UserCountOutputType = {
     permissions: number
+    productsCreated: number
+    productsUpdated: number
+    productionsCreated: number
+    productionsUpdated: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permissions?: boolean | UserCountOutputTypeCountPermissionsArgs
+    productsCreated?: boolean | UserCountOutputTypeCountProductsCreatedArgs
+    productsUpdated?: boolean | UserCountOutputTypeCountProductsUpdatedArgs
+    productionsCreated?: boolean | UserCountOutputTypeCountProductionsCreatedArgs
+    productionsUpdated?: boolean | UserCountOutputTypeCountProductionsUpdatedArgs
   }
 
   // Custom InputTypes
@@ -1273,6 +1281,34 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountPermissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: UserPermissionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProductsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProductsUpdatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProductionsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductionEntryWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProductionsUpdatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductionEntryWhereInput
   }
 
 
@@ -1507,6 +1543,10 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     permissions?: boolean | User$permissionsArgs<ExtArgs>
+    productsCreated?: boolean | User$productsCreatedArgs<ExtArgs>
+    productsUpdated?: boolean | User$productsUpdatedArgs<ExtArgs>
+    productionsCreated?: boolean | User$productionsCreatedArgs<ExtArgs>
+    productionsUpdated?: boolean | User$productionsUpdatedArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -1537,6 +1577,10 @@ export namespace Prisma {
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     permissions?: boolean | User$permissionsArgs<ExtArgs>
+    productsCreated?: boolean | User$productsCreatedArgs<ExtArgs>
+    productsUpdated?: boolean | User$productsUpdatedArgs<ExtArgs>
+    productionsCreated?: boolean | User$productionsCreatedArgs<ExtArgs>
+    productionsUpdated?: boolean | User$productionsUpdatedArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1546,6 +1590,10 @@ export namespace Prisma {
     name: "User"
     objects: {
       permissions: Prisma.$UserPermissionPayload<ExtArgs>[]
+      productsCreated: Prisma.$ProductPayload<ExtArgs>[]
+      productsUpdated: Prisma.$ProductPayload<ExtArgs>[]
+      productionsCreated: Prisma.$ProductionEntryPayload<ExtArgs>[]
+      productionsUpdated: Prisma.$ProductionEntryPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1948,6 +1996,10 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     permissions<T extends User$permissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$permissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPermissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productsCreated<T extends User$productsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$productsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productsUpdated<T extends User$productsUpdatedArgs<ExtArgs> = {}>(args?: Subset<T, User$productsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productionsCreated<T extends User$productionsCreatedArgs<ExtArgs> = {}>(args?: Subset<T, User$productionsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productionsUpdated<T extends User$productionsUpdatedArgs<ExtArgs> = {}>(args?: Subset<T, User$productionsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2394,6 +2446,102 @@ export namespace Prisma {
   }
 
   /**
+   * User.productsCreated
+   */
+  export type User$productsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    where?: ProductWhereInput
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    cursor?: ProductWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * User.productsUpdated
+   */
+  export type User$productsUpdatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    where?: ProductWhereInput
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    cursor?: ProductWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * User.productionsCreated
+   */
+  export type User$productionsCreatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductionEntry
+     */
+    select?: ProductionEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductionEntry
+     */
+    omit?: ProductionEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductionEntryInclude<ExtArgs> | null
+    where?: ProductionEntryWhereInput
+    orderBy?: ProductionEntryOrderByWithRelationInput | ProductionEntryOrderByWithRelationInput[]
+    cursor?: ProductionEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductionEntryScalarFieldEnum | ProductionEntryScalarFieldEnum[]
+  }
+
+  /**
+   * User.productionsUpdated
+   */
+  export type User$productionsUpdatedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductionEntry
+     */
+    select?: ProductionEntrySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProductionEntry
+     */
+    omit?: ProductionEntryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductionEntryInclude<ExtArgs> | null
+    where?: ProductionEntryWhereInput
+    orderBy?: ProductionEntryOrderByWithRelationInput | ProductionEntryOrderByWithRelationInput[]
+    cursor?: ProductionEntryWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductionEntryScalarFieldEnum | ProductionEntryScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2440,6 +2588,8 @@ export namespace Prisma {
     minProduction: number | null
     maxProduction: number | null
     status: $Enums.Status | null
+    createdById: string | null
+    updatedById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2450,6 +2600,8 @@ export namespace Prisma {
     minProduction: number | null
     maxProduction: number | null
     status: $Enums.Status | null
+    createdById: string | null
+    updatedById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2460,6 +2612,8 @@ export namespace Prisma {
     minProduction: number
     maxProduction: number
     status: number
+    createdById: number
+    updatedById: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2482,6 +2636,8 @@ export namespace Prisma {
     minProduction?: true
     maxProduction?: true
     status?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2492,6 +2648,8 @@ export namespace Prisma {
     minProduction?: true
     maxProduction?: true
     status?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2502,6 +2660,8 @@ export namespace Prisma {
     minProduction?: true
     maxProduction?: true
     status?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2599,6 +2759,8 @@ export namespace Prisma {
     minProduction: number
     maxProduction: number
     status: $Enums.Status
+    createdById: string
+    updatedById: string | null
     createdAt: Date
     updatedAt: Date
     _count: ProductCountAggregateOutputType | null
@@ -2628,9 +2790,13 @@ export namespace Prisma {
     minProduction?: boolean
     maxProduction?: boolean
     status?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     productions?: boolean | Product$productionsArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -2640,8 +2806,12 @@ export namespace Prisma {
     minProduction?: boolean
     maxProduction?: boolean
     status?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2650,8 +2820,12 @@ export namespace Prisma {
     minProduction?: boolean
     maxProduction?: boolean
     status?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
   export type ProductSelectScalar = {
@@ -2660,22 +2834,34 @@ export namespace Prisma {
     minProduction?: boolean
     maxProduction?: boolean
     status?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "minProduction" | "maxProduction" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "minProduction" | "maxProduction" | "status" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     productions?: boolean | Product$productionsArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type ProductIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
+  }
+  export type ProductIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | Product$updatedByArgs<ExtArgs>
+  }
 
   export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Product"
     objects: {
       productions: Prisma.$ProductionEntryPayload<ExtArgs>[]
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2683,6 +2869,8 @@ export namespace Prisma {
       minProduction: number
       maxProduction: number
       status: $Enums.Status
+      createdById: string
+      updatedById: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["product"]>
@@ -3080,6 +3268,8 @@ export namespace Prisma {
   export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     productions<T extends Product$productionsArgs<ExtArgs> = {}>(args?: Subset<T, Product$productionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    updatedBy<T extends Product$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, Product$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3114,6 +3304,8 @@ export namespace Prisma {
     readonly minProduction: FieldRef<"Product", 'Float'>
     readonly maxProduction: FieldRef<"Product", 'Float'>
     readonly status: FieldRef<"Product", 'Status'>
+    readonly createdById: FieldRef<"Product", 'String'>
+    readonly updatedById: FieldRef<"Product", 'String'>
     readonly createdAt: FieldRef<"Product", 'DateTime'>
     readonly updatedAt: FieldRef<"Product", 'DateTime'>
   }
@@ -3365,6 +3557,10 @@ export namespace Prisma {
      */
     data: ProductCreateManyInput | ProductCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3435,6 +3631,10 @@ export namespace Prisma {
      * Limit how many Products to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -3528,6 +3728,25 @@ export namespace Prisma {
   }
 
   /**
+   * Product.updatedBy
+   */
+  export type Product$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Product without action
    */
   export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3572,6 +3791,8 @@ export namespace Prisma {
     quantityProduced: number | null
     status: $Enums.Status | null
     justification: string | null
+    createdById: string | null
+    updatedById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3582,6 +3803,8 @@ export namespace Prisma {
     quantityProduced: number | null
     status: $Enums.Status | null
     justification: string | null
+    createdById: string | null
+    updatedById: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -3592,6 +3815,8 @@ export namespace Prisma {
     quantityProduced: number
     status: number
     justification: number
+    createdById: number
+    updatedById: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -3612,6 +3837,8 @@ export namespace Prisma {
     quantityProduced?: true
     status?: true
     justification?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3622,6 +3849,8 @@ export namespace Prisma {
     quantityProduced?: true
     status?: true
     justification?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -3632,6 +3861,8 @@ export namespace Prisma {
     quantityProduced?: true
     status?: true
     justification?: true
+    createdById?: true
+    updatedById?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -3729,6 +3960,8 @@ export namespace Prisma {
     quantityProduced: number
     status: $Enums.Status
     justification: string | null
+    createdById: string
+    updatedById: string | null
     createdAt: Date
     updatedAt: Date
     _count: ProductionEntryCountAggregateOutputType | null
@@ -3758,8 +3991,12 @@ export namespace Prisma {
     quantityProduced?: boolean
     status?: boolean
     justification?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productionEntry"]>
 
@@ -3769,8 +4006,12 @@ export namespace Prisma {
     quantityProduced?: boolean
     status?: boolean
     justification?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productionEntry"]>
 
@@ -3780,8 +4021,12 @@ export namespace Prisma {
     quantityProduced?: boolean
     status?: boolean
     justification?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["productionEntry"]>
 
@@ -3791,24 +4036,34 @@ export namespace Prisma {
     quantityProduced?: boolean
     status?: boolean
     justification?: boolean
+    createdById?: boolean
+    updatedById?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type ProductionEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "quantityProduced" | "status" | "justification" | "createdAt" | "updatedAt", ExtArgs["result"]["productionEntry"]>
+  export type ProductionEntryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "productId" | "quantityProduced" | "status" | "justification" | "createdById" | "updatedById" | "createdAt" | "updatedAt", ExtArgs["result"]["productionEntry"]>
   export type ProductionEntryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }
   export type ProductionEntryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }
   export type ProductionEntryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    updatedBy?: boolean | ProductionEntry$updatedByArgs<ExtArgs>
     product?: boolean | ProductDefaultArgs<ExtArgs>
   }
 
   export type $ProductionEntryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ProductionEntry"
     objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      updatedBy: Prisma.$UserPayload<ExtArgs> | null
       product: Prisma.$ProductPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -3817,6 +4072,8 @@ export namespace Prisma {
       quantityProduced: number
       status: $Enums.Status
       justification: string | null
+      createdById: string
+      updatedById: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productionEntry"]>
@@ -4213,6 +4470,8 @@ export namespace Prisma {
    */
   export interface Prisma__ProductionEntryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    updatedBy<T extends ProductionEntry$updatedByArgs<ExtArgs> = {}>(args?: Subset<T, ProductionEntry$updatedByArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -4248,6 +4507,8 @@ export namespace Prisma {
     readonly quantityProduced: FieldRef<"ProductionEntry", 'Float'>
     readonly status: FieldRef<"ProductionEntry", 'Status'>
     readonly justification: FieldRef<"ProductionEntry", 'String'>
+    readonly createdById: FieldRef<"ProductionEntry", 'String'>
+    readonly updatedById: FieldRef<"ProductionEntry", 'String'>
     readonly createdAt: FieldRef<"ProductionEntry", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductionEntry", 'DateTime'>
   }
@@ -4643,6 +4904,25 @@ export namespace Prisma {
      * Limit how many ProductionEntries to delete.
      */
     limit?: number
+  }
+
+  /**
+   * ProductionEntry.updatedBy
+   */
+  export type ProductionEntry$updatedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
   }
 
   /**
@@ -6805,6 +7085,8 @@ export namespace Prisma {
     minProduction: 'minProduction',
     maxProduction: 'maxProduction',
     status: 'status',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6818,6 +7100,8 @@ export namespace Prisma {
     quantityProduced: 'quantityProduced',
     status: 'status',
     justification: 'justification',
+    createdById: 'createdById',
+    updatedById: 'updatedById',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -6957,6 +7241,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     permissions?: UserPermissionListRelationFilter
+    productsCreated?: ProductListRelationFilter
+    productsUpdated?: ProductListRelationFilter
+    productionsCreated?: ProductionEntryListRelationFilter
+    productionsUpdated?: ProductionEntryListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -6966,6 +7254,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     permissions?: UserPermissionOrderByRelationAggregateInput
+    productsCreated?: ProductOrderByRelationAggregateInput
+    productsUpdated?: ProductOrderByRelationAggregateInput
+    productionsCreated?: ProductionEntryOrderByRelationAggregateInput
+    productionsUpdated?: ProductionEntryOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -6978,6 +7270,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     permissions?: UserPermissionListRelationFilter
+    productsCreated?: ProductListRelationFilter
+    productsUpdated?: ProductListRelationFilter
+    productionsCreated?: ProductionEntryListRelationFilter
+    productionsUpdated?: ProductionEntryListRelationFilter
   }, "id" | "name">
 
   export type UserOrderByWithAggregationInput = {
@@ -7011,9 +7307,13 @@ export namespace Prisma {
     minProduction?: FloatFilter<"Product"> | number
     maxProduction?: FloatFilter<"Product"> | number
     status?: EnumStatusFilter<"Product"> | $Enums.Status
+    createdById?: StringFilter<"Product"> | string
+    updatedById?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     productions?: ProductionEntryListRelationFilter
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -7022,9 +7322,13 @@ export namespace Prisma {
     minProduction?: SortOrder
     maxProduction?: SortOrder
     status?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     productions?: ProductionEntryOrderByRelationAggregateInput
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
   }
 
   export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -7036,9 +7340,13 @@ export namespace Prisma {
     minProduction?: FloatFilter<"Product"> | number
     maxProduction?: FloatFilter<"Product"> | number
     status?: EnumStatusFilter<"Product"> | $Enums.Status
+    createdById?: StringFilter<"Product"> | string
+    updatedById?: StringNullableFilter<"Product"> | string | null
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updatedAt?: DateTimeFilter<"Product"> | Date | string
     productions?: ProductionEntryListRelationFilter
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type ProductOrderByWithAggregationInput = {
@@ -7047,6 +7355,8 @@ export namespace Prisma {
     minProduction?: SortOrder
     maxProduction?: SortOrder
     status?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductCountOrderByAggregateInput
@@ -7065,6 +7375,8 @@ export namespace Prisma {
     minProduction?: FloatWithAggregatesFilter<"Product"> | number
     maxProduction?: FloatWithAggregatesFilter<"Product"> | number
     status?: EnumStatusWithAggregatesFilter<"Product"> | $Enums.Status
+    createdById?: StringWithAggregatesFilter<"Product"> | string
+    updatedById?: StringNullableWithAggregatesFilter<"Product"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
   }
@@ -7078,8 +7390,12 @@ export namespace Prisma {
     quantityProduced?: FloatFilter<"ProductionEntry"> | number
     status?: EnumStatusFilter<"ProductionEntry"> | $Enums.Status
     justification?: StringNullableFilter<"ProductionEntry"> | string | null
+    createdById?: StringFilter<"ProductionEntry"> | string
+    updatedById?: StringNullableFilter<"ProductionEntry"> | string | null
     createdAt?: DateTimeFilter<"ProductionEntry"> | Date | string
     updatedAt?: DateTimeFilter<"ProductionEntry"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
   }
 
@@ -7089,8 +7405,12 @@ export namespace Prisma {
     quantityProduced?: SortOrder
     status?: SortOrder
     justification?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    updatedBy?: UserOrderByWithRelationInput
     product?: ProductOrderByWithRelationInput
   }
 
@@ -7103,8 +7423,12 @@ export namespace Prisma {
     quantityProduced?: FloatFilter<"ProductionEntry"> | number
     status?: EnumStatusFilter<"ProductionEntry"> | $Enums.Status
     justification?: StringNullableFilter<"ProductionEntry"> | string | null
+    createdById?: StringFilter<"ProductionEntry"> | string
+    updatedById?: StringNullableFilter<"ProductionEntry"> | string | null
     createdAt?: DateTimeFilter<"ProductionEntry"> | Date | string
     updatedAt?: DateTimeFilter<"ProductionEntry"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    updatedBy?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
   }, "id">
 
@@ -7114,6 +7438,8 @@ export namespace Prisma {
     quantityProduced?: SortOrder
     status?: SortOrder
     justification?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: ProductionEntryCountOrderByAggregateInput
@@ -7132,6 +7458,8 @@ export namespace Prisma {
     quantityProduced?: FloatWithAggregatesFilter<"ProductionEntry"> | number
     status?: EnumStatusWithAggregatesFilter<"ProductionEntry"> | $Enums.Status
     justification?: StringNullableWithAggregatesFilter<"ProductionEntry"> | string | null
+    createdById?: StringWithAggregatesFilter<"ProductionEntry"> | string
+    updatedById?: StringNullableWithAggregatesFilter<"ProductionEntry"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"ProductionEntry"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductionEntry"> | Date | string
   }
@@ -7246,6 +7574,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    productsCreated?: ProductCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -7255,6 +7587,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    productsCreated?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductUncheckedCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUpdateInput = {
@@ -7264,6 +7600,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -7273,6 +7613,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUncheckedUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -7308,6 +7652,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     productions?: ProductionEntryCreateNestedManyWithoutProductInput
+    createdBy: UserCreateNestedOneWithoutProductsCreatedInput
+    updatedBy?: UserCreateNestedOneWithoutProductsUpdatedInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -7316,6 +7662,8 @@ export namespace Prisma {
     minProduction: number
     maxProduction: number
     status?: $Enums.Status
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     productions?: ProductionEntryUncheckedCreateNestedManyWithoutProductInput
@@ -7330,6 +7678,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productions?: ProductionEntryUpdateManyWithoutProductNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutProductsCreatedNestedInput
+    updatedBy?: UserUpdateOneWithoutProductsUpdatedNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -7338,6 +7688,8 @@ export namespace Prisma {
     minProduction?: FloatFieldUpdateOperationsInput | number
     maxProduction?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productions?: ProductionEntryUncheckedUpdateManyWithoutProductNestedInput
@@ -7349,6 +7701,8 @@ export namespace Prisma {
     minProduction: number
     maxProduction: number
     status?: $Enums.Status
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7369,6 +7723,8 @@ export namespace Prisma {
     minProduction?: FloatFieldUpdateOperationsInput | number
     maxProduction?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7380,6 +7736,8 @@ export namespace Prisma {
     justification?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutProductionsCreatedInput
+    updatedBy?: UserCreateNestedOneWithoutProductionsUpdatedInput
     product: ProductCreateNestedOneWithoutProductionsInput
   }
 
@@ -7389,6 +7747,8 @@ export namespace Prisma {
     quantityProduced: number
     status?: $Enums.Status
     justification?: string | null
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7400,6 +7760,8 @@ export namespace Prisma {
     justification?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutProductionsCreatedNestedInput
+    updatedBy?: UserUpdateOneWithoutProductionsUpdatedNestedInput
     product?: ProductUpdateOneRequiredWithoutProductionsNestedInput
   }
 
@@ -7409,6 +7771,8 @@ export namespace Prisma {
     quantityProduced?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7419,6 +7783,8 @@ export namespace Prisma {
     quantityProduced: number
     status?: $Enums.Status
     justification?: string | null
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7438,6 +7804,8 @@ export namespace Prisma {
     quantityProduced?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7574,7 +7942,27 @@ export namespace Prisma {
     none?: UserPermissionWhereInput
   }
 
+  export type ProductListRelationFilter = {
+    every?: ProductWhereInput
+    some?: ProductWhereInput
+    none?: ProductWhereInput
+  }
+
+  export type ProductionEntryListRelationFilter = {
+    every?: ProductionEntryWhereInput
+    some?: ProductionEntryWhereInput
+    none?: ProductionEntryWhereInput
+  }
+
   export type UserPermissionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductionEntryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7652,14 +8040,34 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
-  export type ProductionEntryListRelationFilter = {
-    every?: ProductionEntryWhereInput
-    some?: ProductionEntryWhereInput
-    none?: ProductionEntryWhereInput
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type ProductionEntryOrderByRelationAggregateInput = {
-    _count?: SortOrder
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
   }
 
   export type ProductCountOrderByAggregateInput = {
@@ -7668,6 +8076,8 @@ export namespace Prisma {
     minProduction?: SortOrder
     maxProduction?: SortOrder
     status?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7683,6 +8093,8 @@ export namespace Prisma {
     minProduction?: SortOrder
     maxProduction?: SortOrder
     status?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7693,6 +8105,8 @@ export namespace Prisma {
     minProduction?: SortOrder
     maxProduction?: SortOrder
     status?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -7728,69 +8142,6 @@ export namespace Prisma {
     _max?: NestedEnumStatusFilter<$PrismaModel>
   }
 
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type ProductScalarRelationFilter = {
-    is?: ProductWhereInput
-    isNot?: ProductWhereInput
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
-  export type ProductionEntryCountOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    quantityProduced?: SortOrder
-    status?: SortOrder
-    justification?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionEntryAvgOrderByAggregateInput = {
-    quantityProduced?: SortOrder
-  }
-
-  export type ProductionEntryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    quantityProduced?: SortOrder
-    status?: SortOrder
-    justification?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionEntryMinOrderByAggregateInput = {
-    id?: SortOrder
-    productId?: SortOrder
-    quantityProduced?: SortOrder
-    status?: SortOrder
-    justification?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionEntrySumOrderByAggregateInput = {
-    quantityProduced?: SortOrder
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -7807,6 +8158,55 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
+  export type ProductionEntryCountOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    quantityProduced?: SortOrder
+    status?: SortOrder
+    justification?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductionEntryAvgOrderByAggregateInput = {
+    quantityProduced?: SortOrder
+  }
+
+  export type ProductionEntryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    quantityProduced?: SortOrder
+    status?: SortOrder
+    justification?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductionEntryMinOrderByAggregateInput = {
+    id?: SortOrder
+    productId?: SortOrder
+    quantityProduced?: SortOrder
+    status?: SortOrder
+    justification?: SortOrder
+    createdById?: SortOrder
+    updatedById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductionEntrySumOrderByAggregateInput = {
+    quantityProduced?: SortOrder
   }
 
   export type PermissionCountOrderByAggregateInput = {
@@ -7828,11 +8228,6 @@ export namespace Prisma {
     name?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type PermissionScalarRelationFilter = {
@@ -7868,11 +8263,67 @@ export namespace Prisma {
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
   }
 
+  export type ProductCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput> | ProductCreateWithoutCreatedByInput[] | ProductUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutCreatedByInput | ProductCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProductCreateManyCreatedByInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type ProductCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput> | ProductCreateWithoutUpdatedByInput[] | ProductUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutUpdatedByInput | ProductCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ProductCreateManyUpdatedByInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type ProductionEntryCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput> | ProductionEntryCreateWithoutCreatedByInput[] | ProductionEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutCreatedByInput | ProductionEntryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProductionEntryCreateManyCreatedByInputEnvelope
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+  }
+
+  export type ProductionEntryCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput> | ProductionEntryCreateWithoutUpdatedByInput[] | ProductionEntryUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutUpdatedByInput | ProductionEntryCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ProductionEntryCreateManyUpdatedByInputEnvelope
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+  }
+
   export type UserPermissionUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
     createMany?: UserPermissionCreateManyUserInputEnvelope
     connect?: UserPermissionWhereUniqueInput | UserPermissionWhereUniqueInput[]
+  }
+
+  export type ProductUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput> | ProductCreateWithoutCreatedByInput[] | ProductUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutCreatedByInput | ProductCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProductCreateManyCreatedByInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type ProductUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput> | ProductCreateWithoutUpdatedByInput[] | ProductUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutUpdatedByInput | ProductCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ProductCreateManyUpdatedByInputEnvelope
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+  }
+
+  export type ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput> | ProductionEntryCreateWithoutCreatedByInput[] | ProductionEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutCreatedByInput | ProductionEntryCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ProductionEntryCreateManyCreatedByInputEnvelope
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+  }
+
+  export type ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput = {
+    create?: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput> | ProductionEntryCreateWithoutUpdatedByInput[] | ProductionEntryUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutUpdatedByInput | ProductionEntryCreateOrConnectWithoutUpdatedByInput[]
+    createMany?: ProductionEntryCreateManyUpdatedByInputEnvelope
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -7897,6 +8348,62 @@ export namespace Prisma {
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
   }
 
+  export type ProductUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput> | ProductCreateWithoutCreatedByInput[] | ProductUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutCreatedByInput | ProductCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutCreatedByInput | ProductUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProductCreateManyCreatedByInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutCreatedByInput | ProductUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutCreatedByInput | ProductUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type ProductUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput> | ProductCreateWithoutUpdatedByInput[] | ProductUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutUpdatedByInput | ProductCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutUpdatedByInput | ProductUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ProductCreateManyUpdatedByInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutUpdatedByInput | ProductUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutUpdatedByInput | ProductUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type ProductionEntryUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput> | ProductionEntryCreateWithoutCreatedByInput[] | ProductionEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutCreatedByInput | ProductionEntryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProductionEntryUpsertWithWhereUniqueWithoutCreatedByInput | ProductionEntryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProductionEntryCreateManyCreatedByInputEnvelope
+    set?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    disconnect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    delete?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    update?: ProductionEntryUpdateWithWhereUniqueWithoutCreatedByInput | ProductionEntryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProductionEntryUpdateManyWithWhereWithoutCreatedByInput | ProductionEntryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+  }
+
+  export type ProductionEntryUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput> | ProductionEntryCreateWithoutUpdatedByInput[] | ProductionEntryUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutUpdatedByInput | ProductionEntryCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ProductionEntryUpsertWithWhereUniqueWithoutUpdatedByInput | ProductionEntryUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ProductionEntryCreateManyUpdatedByInputEnvelope
+    set?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    disconnect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    delete?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    update?: ProductionEntryUpdateWithWhereUniqueWithoutUpdatedByInput | ProductionEntryUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ProductionEntryUpdateManyWithWhereWithoutUpdatedByInput | ProductionEntryUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+  }
+
   export type UserPermissionUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<UserPermissionCreateWithoutUserInput, UserPermissionUncheckedCreateWithoutUserInput> | UserPermissionCreateWithoutUserInput[] | UserPermissionUncheckedCreateWithoutUserInput[]
     connectOrCreate?: UserPermissionCreateOrConnectWithoutUserInput | UserPermissionCreateOrConnectWithoutUserInput[]
@@ -7911,11 +8418,79 @@ export namespace Prisma {
     deleteMany?: UserPermissionScalarWhereInput | UserPermissionScalarWhereInput[]
   }
 
+  export type ProductUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput> | ProductCreateWithoutCreatedByInput[] | ProductUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutCreatedByInput | ProductCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutCreatedByInput | ProductUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProductCreateManyCreatedByInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutCreatedByInput | ProductUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutCreatedByInput | ProductUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type ProductUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput> | ProductCreateWithoutUpdatedByInput[] | ProductUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductCreateOrConnectWithoutUpdatedByInput | ProductCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ProductUpsertWithWhereUniqueWithoutUpdatedByInput | ProductUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ProductCreateManyUpdatedByInputEnvelope
+    set?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    disconnect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    delete?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    connect?: ProductWhereUniqueInput | ProductWhereUniqueInput[]
+    update?: ProductUpdateWithWhereUniqueWithoutUpdatedByInput | ProductUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ProductUpdateManyWithWhereWithoutUpdatedByInput | ProductUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ProductScalarWhereInput | ProductScalarWhereInput[]
+  }
+
+  export type ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput> | ProductionEntryCreateWithoutCreatedByInput[] | ProductionEntryUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutCreatedByInput | ProductionEntryCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ProductionEntryUpsertWithWhereUniqueWithoutCreatedByInput | ProductionEntryUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ProductionEntryCreateManyCreatedByInputEnvelope
+    set?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    disconnect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    delete?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    update?: ProductionEntryUpdateWithWhereUniqueWithoutCreatedByInput | ProductionEntryUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ProductionEntryUpdateManyWithWhereWithoutCreatedByInput | ProductionEntryUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+  }
+
+  export type ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput = {
+    create?: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput> | ProductionEntryCreateWithoutUpdatedByInput[] | ProductionEntryUncheckedCreateWithoutUpdatedByInput[]
+    connectOrCreate?: ProductionEntryCreateOrConnectWithoutUpdatedByInput | ProductionEntryCreateOrConnectWithoutUpdatedByInput[]
+    upsert?: ProductionEntryUpsertWithWhereUniqueWithoutUpdatedByInput | ProductionEntryUpsertWithWhereUniqueWithoutUpdatedByInput[]
+    createMany?: ProductionEntryCreateManyUpdatedByInputEnvelope
+    set?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    disconnect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    delete?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+    update?: ProductionEntryUpdateWithWhereUniqueWithoutUpdatedByInput | ProductionEntryUpdateWithWhereUniqueWithoutUpdatedByInput[]
+    updateMany?: ProductionEntryUpdateManyWithWhereWithoutUpdatedByInput | ProductionEntryUpdateManyWithWhereWithoutUpdatedByInput[]
+    deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+  }
+
   export type ProductionEntryCreateNestedManyWithoutProductInput = {
     create?: XOR<ProductionEntryCreateWithoutProductInput, ProductionEntryUncheckedCreateWithoutProductInput> | ProductionEntryCreateWithoutProductInput[] | ProductionEntryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductionEntryCreateOrConnectWithoutProductInput | ProductionEntryCreateOrConnectWithoutProductInput[]
     createMany?: ProductionEntryCreateManyProductInputEnvelope
     connect?: ProductionEntryWhereUniqueInput | ProductionEntryWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedOneWithoutProductsCreatedInput = {
+    create?: XOR<UserCreateWithoutProductsCreatedInput, UserUncheckedCreateWithoutProductsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductsCreatedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutProductsUpdatedInput = {
+    create?: XOR<UserCreateWithoutProductsUpdatedInput, UserUncheckedCreateWithoutProductsUpdatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductsUpdatedInput
+    connect?: UserWhereUniqueInput
   }
 
   export type ProductionEntryUncheckedCreateNestedManyWithoutProductInput = {
@@ -7951,6 +8526,28 @@ export namespace Prisma {
     deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
   }
 
+  export type UserUpdateOneRequiredWithoutProductsCreatedNestedInput = {
+    create?: XOR<UserCreateWithoutProductsCreatedInput, UserUncheckedCreateWithoutProductsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductsCreatedInput
+    upsert?: UserUpsertWithoutProductsCreatedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductsCreatedInput, UserUpdateWithoutProductsCreatedInput>, UserUncheckedUpdateWithoutProductsCreatedInput>
+  }
+
+  export type UserUpdateOneWithoutProductsUpdatedNestedInput = {
+    create?: XOR<UserCreateWithoutProductsUpdatedInput, UserUncheckedCreateWithoutProductsUpdatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductsUpdatedInput
+    upsert?: UserUpsertWithoutProductsUpdatedInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductsUpdatedInput, UserUpdateWithoutProductsUpdatedInput>, UserUncheckedUpdateWithoutProductsUpdatedInput>
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type ProductionEntryUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<ProductionEntryCreateWithoutProductInput, ProductionEntryUncheckedCreateWithoutProductInput> | ProductionEntryCreateWithoutProductInput[] | ProductionEntryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: ProductionEntryCreateOrConnectWithoutProductInput | ProductionEntryCreateOrConnectWithoutProductInput[]
@@ -7965,14 +8562,40 @@ export namespace Prisma {
     deleteMany?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutProductionsCreatedInput = {
+    create?: XOR<UserCreateWithoutProductionsCreatedInput, UserUncheckedCreateWithoutProductionsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductionsCreatedInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutProductionsUpdatedInput = {
+    create?: XOR<UserCreateWithoutProductionsUpdatedInput, UserUncheckedCreateWithoutProductionsUpdatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductionsUpdatedInput
+    connect?: UserWhereUniqueInput
+  }
+
   export type ProductCreateNestedOneWithoutProductionsInput = {
     create?: XOR<ProductCreateWithoutProductionsInput, ProductUncheckedCreateWithoutProductionsInput>
     connectOrCreate?: ProductCreateOrConnectWithoutProductionsInput
     connect?: ProductWhereUniqueInput
   }
 
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type UserUpdateOneRequiredWithoutProductionsCreatedNestedInput = {
+    create?: XOR<UserCreateWithoutProductionsCreatedInput, UserUncheckedCreateWithoutProductionsCreatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductionsCreatedInput
+    upsert?: UserUpsertWithoutProductionsCreatedInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductionsCreatedInput, UserUpdateWithoutProductionsCreatedInput>, UserUncheckedUpdateWithoutProductionsCreatedInput>
+  }
+
+  export type UserUpdateOneWithoutProductionsUpdatedNestedInput = {
+    create?: XOR<UserCreateWithoutProductionsUpdatedInput, UserUncheckedCreateWithoutProductionsUpdatedInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProductionsUpdatedInput
+    upsert?: UserUpsertWithoutProductionsUpdatedInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProductionsUpdatedInput, UserUpdateWithoutProductionsUpdatedInput>, UserUncheckedUpdateWithoutProductionsUpdatedInput>
   }
 
   export type ProductUpdateOneRequiredWithoutProductionsNestedInput = {
@@ -8138,6 +8761,20 @@ export namespace Prisma {
     not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -8162,20 +8799,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumStatusFilter<$PrismaModel>
     _max?: NestedEnumStatusFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -8228,6 +8851,138 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ProductCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productions?: ProductionEntryCreateNestedManyWithoutProductInput
+    updatedBy?: UserCreateNestedOneWithoutProductsUpdatedInput
+  }
+
+  export type ProductUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productions?: ProductionEntryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutCreatedByInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProductCreateManyCreatedByInputEnvelope = {
+    data: ProductCreateManyCreatedByInput | ProductCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductCreateWithoutUpdatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productions?: ProductionEntryCreateNestedManyWithoutProductInput
+    createdBy: UserCreateNestedOneWithoutProductsCreatedInput
+  }
+
+  export type ProductUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    productions?: ProductionEntryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutUpdatedByInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ProductCreateManyUpdatedByInputEnvelope = {
+    data: ProductCreateManyUpdatedByInput | ProductCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductionEntryCreateWithoutCreatedByInput = {
+    id?: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    updatedBy?: UserCreateNestedOneWithoutProductionsUpdatedInput
+    product: ProductCreateNestedOneWithoutProductionsInput
+  }
+
+  export type ProductionEntryUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    productId: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductionEntryCreateOrConnectWithoutCreatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    create: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProductionEntryCreateManyCreatedByInputEnvelope = {
+    data: ProductionEntryCreateManyCreatedByInput | ProductionEntryCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProductionEntryCreateWithoutUpdatedByInput = {
+    id?: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutProductionsCreatedInput
+    product: ProductCreateNestedOneWithoutProductionsInput
+  }
+
+  export type ProductionEntryUncheckedCreateWithoutUpdatedByInput = {
+    id?: string
+    productId: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductionEntryCreateOrConnectWithoutUpdatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    create: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ProductionEntryCreateManyUpdatedByInputEnvelope = {
+    data: ProductionEntryCreateManyUpdatedByInput | ProductionEntryCreateManyUpdatedByInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserPermissionUpsertWithWhereUniqueWithoutUserInput = {
     where: UserPermissionWhereUniqueInput
     update: XOR<UserPermissionUpdateWithoutUserInput, UserPermissionUncheckedUpdateWithoutUserInput>
@@ -8254,6 +9009,100 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"UserPermission"> | Date | string
   }
 
+  export type ProductUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ProductWhereUniqueInput
+    update: XOR<ProductUpdateWithoutCreatedByInput, ProductUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ProductCreateWithoutCreatedByInput, ProductUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProductUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ProductWhereUniqueInput
+    data: XOR<ProductUpdateWithoutCreatedByInput, ProductUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ProductUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ProductScalarWhereInput
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ProductScalarWhereInput = {
+    AND?: ProductScalarWhereInput | ProductScalarWhereInput[]
+    OR?: ProductScalarWhereInput[]
+    NOT?: ProductScalarWhereInput | ProductScalarWhereInput[]
+    id?: StringFilter<"Product"> | string
+    name?: StringFilter<"Product"> | string
+    minProduction?: FloatFilter<"Product"> | number
+    maxProduction?: FloatFilter<"Product"> | number
+    status?: EnumStatusFilter<"Product"> | $Enums.Status
+    createdById?: StringFilter<"Product"> | string
+    updatedById?: StringNullableFilter<"Product"> | string | null
+    createdAt?: DateTimeFilter<"Product"> | Date | string
+    updatedAt?: DateTimeFilter<"Product"> | Date | string
+  }
+
+  export type ProductUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: ProductWhereUniqueInput
+    update: XOR<ProductUpdateWithoutUpdatedByInput, ProductUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<ProductCreateWithoutUpdatedByInput, ProductUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ProductUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: ProductWhereUniqueInput
+    data: XOR<ProductUpdateWithoutUpdatedByInput, ProductUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type ProductUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: ProductScalarWhereInput
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
+  export type ProductionEntryUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    update: XOR<ProductionEntryUpdateWithoutCreatedByInput, ProductionEntryUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ProductionEntryCreateWithoutCreatedByInput, ProductionEntryUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ProductionEntryUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    data: XOR<ProductionEntryUpdateWithoutCreatedByInput, ProductionEntryUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ProductionEntryUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ProductionEntryScalarWhereInput
+    data: XOR<ProductionEntryUpdateManyMutationInput, ProductionEntryUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ProductionEntryScalarWhereInput = {
+    AND?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+    OR?: ProductionEntryScalarWhereInput[]
+    NOT?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
+    id?: StringFilter<"ProductionEntry"> | string
+    productId?: StringFilter<"ProductionEntry"> | string
+    quantityProduced?: FloatFilter<"ProductionEntry"> | number
+    status?: EnumStatusFilter<"ProductionEntry"> | $Enums.Status
+    justification?: StringNullableFilter<"ProductionEntry"> | string | null
+    createdById?: StringFilter<"ProductionEntry"> | string
+    updatedById?: StringNullableFilter<"ProductionEntry"> | string | null
+    createdAt?: DateTimeFilter<"ProductionEntry"> | Date | string
+    updatedAt?: DateTimeFilter<"ProductionEntry"> | Date | string
+  }
+
+  export type ProductionEntryUpsertWithWhereUniqueWithoutUpdatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    update: XOR<ProductionEntryUpdateWithoutUpdatedByInput, ProductionEntryUncheckedUpdateWithoutUpdatedByInput>
+    create: XOR<ProductionEntryCreateWithoutUpdatedByInput, ProductionEntryUncheckedCreateWithoutUpdatedByInput>
+  }
+
+  export type ProductionEntryUpdateWithWhereUniqueWithoutUpdatedByInput = {
+    where: ProductionEntryWhereUniqueInput
+    data: XOR<ProductionEntryUpdateWithoutUpdatedByInput, ProductionEntryUncheckedUpdateWithoutUpdatedByInput>
+  }
+
+  export type ProductionEntryUpdateManyWithWhereWithoutUpdatedByInput = {
+    where: ProductionEntryScalarWhereInput
+    data: XOR<ProductionEntryUpdateManyMutationInput, ProductionEntryUncheckedUpdateManyWithoutUpdatedByInput>
+  }
+
   export type ProductionEntryCreateWithoutProductInput = {
     id?: string
     quantityProduced: number
@@ -8261,6 +9110,8 @@ export namespace Prisma {
     justification?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutProductionsCreatedInput
+    updatedBy?: UserCreateNestedOneWithoutProductionsUpdatedInput
   }
 
   export type ProductionEntryUncheckedCreateWithoutProductInput = {
@@ -8268,6 +9119,8 @@ export namespace Prisma {
     quantityProduced: number
     status?: $Enums.Status
     justification?: string | null
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8280,6 +9133,64 @@ export namespace Prisma {
   export type ProductionEntryCreateManyProductInputEnvelope = {
     data: ProductionEntryCreateManyProductInput | ProductionEntryCreateManyProductInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutProductsCreatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    productsUpdated?: ProductCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutProductsCreatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    productsUpdated?: ProductUncheckedCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutProductsCreatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProductsCreatedInput, UserUncheckedCreateWithoutProductsCreatedInput>
+  }
+
+  export type UserCreateWithoutProductsUpdatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    productsCreated?: ProductCreateNestedManyWithoutCreatedByInput
+    productionsCreated?: ProductionEntryCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutProductsUpdatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    productsCreated?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    productionsCreated?: ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutProductsUpdatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProductsUpdatedInput, UserUncheckedCreateWithoutProductsUpdatedInput>
   }
 
   export type ProductionEntryUpsertWithWhereUniqueWithoutProductInput = {
@@ -8298,17 +9209,132 @@ export namespace Prisma {
     data: XOR<ProductionEntryUpdateManyMutationInput, ProductionEntryUncheckedUpdateManyWithoutProductInput>
   }
 
-  export type ProductionEntryScalarWhereInput = {
-    AND?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
-    OR?: ProductionEntryScalarWhereInput[]
-    NOT?: ProductionEntryScalarWhereInput | ProductionEntryScalarWhereInput[]
-    id?: StringFilter<"ProductionEntry"> | string
-    productId?: StringFilter<"ProductionEntry"> | string
-    quantityProduced?: FloatFilter<"ProductionEntry"> | number
-    status?: EnumStatusFilter<"ProductionEntry"> | $Enums.Status
-    justification?: StringNullableFilter<"ProductionEntry"> | string | null
-    createdAt?: DateTimeFilter<"ProductionEntry"> | Date | string
-    updatedAt?: DateTimeFilter<"ProductionEntry"> | Date | string
+  export type UserUpsertWithoutProductsCreatedInput = {
+    update: XOR<UserUpdateWithoutProductsCreatedInput, UserUncheckedUpdateWithoutProductsCreatedInput>
+    create: XOR<UserCreateWithoutProductsCreatedInput, UserUncheckedCreateWithoutProductsCreatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProductsCreatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProductsCreatedInput, UserUncheckedUpdateWithoutProductsCreatedInput>
+  }
+
+  export type UserUpdateWithoutProductsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    productsUpdated?: ProductUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProductsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    productsUpdated?: ProductUncheckedUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutProductsUpdatedInput = {
+    update: XOR<UserUpdateWithoutProductsUpdatedInput, UserUncheckedUpdateWithoutProductsUpdatedInput>
+    create: XOR<UserCreateWithoutProductsUpdatedInput, UserUncheckedCreateWithoutProductsUpdatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProductsUpdatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProductsUpdatedInput, UserUncheckedUpdateWithoutProductsUpdatedInput>
+  }
+
+  export type UserUpdateWithoutProductsUpdatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUpdateManyWithoutCreatedByNestedInput
+    productionsCreated?: ProductionEntryUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProductsUpdatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    productionsCreated?: ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserCreateWithoutProductionsCreatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    productsCreated?: ProductCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductCreateNestedManyWithoutUpdatedByInput
+    productionsUpdated?: ProductionEntryCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutProductionsCreatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    productsCreated?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductUncheckedCreateNestedManyWithoutUpdatedByInput
+    productionsUpdated?: ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutProductionsCreatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProductionsCreatedInput, UserUncheckedCreateWithoutProductionsCreatedInput>
+  }
+
+  export type UserCreateWithoutProductionsUpdatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionCreateNestedManyWithoutUserInput
+    productsCreated?: ProductCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserUncheckedCreateWithoutProductionsUpdatedInput = {
+    id?: string
+    name: string
+    password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    permissions?: UserPermissionUncheckedCreateNestedManyWithoutUserInput
+    productsCreated?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductUncheckedCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput
+  }
+
+  export type UserCreateOrConnectWithoutProductionsUpdatedInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProductionsUpdatedInput, UserUncheckedCreateWithoutProductionsUpdatedInput>
   }
 
   export type ProductCreateWithoutProductionsInput = {
@@ -8319,6 +9345,8 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutProductsCreatedInput
+    updatedBy?: UserCreateNestedOneWithoutProductsUpdatedInput
   }
 
   export type ProductUncheckedCreateWithoutProductionsInput = {
@@ -8327,6 +9355,8 @@ export namespace Prisma {
     minProduction: number
     maxProduction: number
     status?: $Enums.Status
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8334,6 +9364,76 @@ export namespace Prisma {
   export type ProductCreateOrConnectWithoutProductionsInput = {
     where: ProductWhereUniqueInput
     create: XOR<ProductCreateWithoutProductionsInput, ProductUncheckedCreateWithoutProductionsInput>
+  }
+
+  export type UserUpsertWithoutProductionsCreatedInput = {
+    update: XOR<UserUpdateWithoutProductionsCreatedInput, UserUncheckedUpdateWithoutProductionsCreatedInput>
+    create: XOR<UserCreateWithoutProductionsCreatedInput, UserUncheckedCreateWithoutProductionsCreatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProductionsCreatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProductionsCreatedInput, UserUncheckedUpdateWithoutProductionsCreatedInput>
+  }
+
+  export type UserUpdateWithoutProductionsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUpdateManyWithoutUpdatedByNestedInput
+    productionsUpdated?: ProductionEntryUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProductionsCreatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUncheckedUpdateManyWithoutUpdatedByNestedInput
+    productionsUpdated?: ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
+  }
+
+  export type UserUpsertWithoutProductionsUpdatedInput = {
+    update: XOR<UserUpdateWithoutProductionsUpdatedInput, UserUncheckedUpdateWithoutProductionsUpdatedInput>
+    create: XOR<UserCreateWithoutProductionsUpdatedInput, UserUncheckedCreateWithoutProductionsUpdatedInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProductionsUpdatedInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProductionsUpdatedInput, UserUncheckedUpdateWithoutProductionsUpdatedInput>
+  }
+
+  export type UserUpdateWithoutProductionsUpdatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProductionsUpdatedInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    permissions?: UserPermissionUncheckedUpdateManyWithoutUserNestedInput
+    productsCreated?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUncheckedUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput
   }
 
   export type ProductUpsertWithoutProductionsInput = {
@@ -8355,6 +9455,8 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutProductsCreatedNestedInput
+    updatedBy?: UserUpdateOneWithoutProductsUpdatedNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutProductionsInput = {
@@ -8363,6 +9465,8 @@ export namespace Prisma {
     minProduction?: FloatFieldUpdateOperationsInput | number
     maxProduction?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8411,6 +9515,10 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    productsCreated?: ProductCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserUncheckedCreateWithoutPermissionsInput = {
@@ -8419,6 +9527,10 @@ export namespace Prisma {
     password: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    productsCreated?: ProductUncheckedCreateNestedManyWithoutCreatedByInput
+    productsUpdated?: ProductUncheckedCreateNestedManyWithoutUpdatedByInput
+    productionsCreated?: ProductionEntryUncheckedCreateNestedManyWithoutCreatedByInput
+    productionsUpdated?: ProductionEntryUncheckedCreateNestedManyWithoutUpdatedByInput
   }
 
   export type UserCreateOrConnectWithoutPermissionsInput = {
@@ -8462,6 +9574,10 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productsCreated?: ProductUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPermissionsInput = {
@@ -8470,6 +9586,10 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productsCreated?: ProductUncheckedUpdateManyWithoutCreatedByNestedInput
+    productsUpdated?: ProductUncheckedUpdateManyWithoutUpdatedByNestedInput
+    productionsCreated?: ProductionEntryUncheckedUpdateManyWithoutCreatedByNestedInput
+    productionsUpdated?: ProductionEntryUncheckedUpdateManyWithoutUpdatedByNestedInput
   }
 
   export type PermissionUpsertWithoutUsersInput = {
@@ -8503,6 +9623,50 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type ProductCreateManyCreatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductCreateManyUpdatedByInput = {
+    id?: string
+    name: string
+    minProduction: number
+    maxProduction: number
+    status?: $Enums.Status
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductionEntryCreateManyCreatedByInput = {
+    id?: string
+    productId: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    updatedById?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductionEntryCreateManyUpdatedByInput = {
+    id?: string
+    productId: string
+    quantityProduced: number
+    status?: $Enums.Status
+    justification?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type UserPermissionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8521,11 +9685,149 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ProductUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productions?: ProductionEntryUpdateManyWithoutProductNestedInput
+    updatedBy?: UserUpdateOneWithoutProductsUpdatedNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productions?: ProductionEntryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productions?: ProductionEntryUpdateManyWithoutProductNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutProductsCreatedNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productions?: ProductionEntryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    minProduction?: FloatFieldUpdateOperationsInput | number
+    maxProduction?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductionEntryUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedBy?: UserUpdateOneWithoutProductionsUpdatedNestedInput
+    product?: ProductUpdateOneRequiredWithoutProductionsNestedInput
+  }
+
+  export type ProductionEntryUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductionEntryUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductionEntryUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutProductionsCreatedNestedInput
+    product?: ProductUpdateOneRequiredWithoutProductionsNestedInput
+  }
+
+  export type ProductionEntryUncheckedUpdateWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductionEntryUncheckedUpdateManyWithoutUpdatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    productId?: StringFieldUpdateOperationsInput | string
+    quantityProduced?: FloatFieldUpdateOperationsInput | number
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ProductionEntryCreateManyProductInput = {
     id?: string
     quantityProduced: number
     status?: $Enums.Status
     justification?: string | null
+    createdById: string
+    updatedById?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -8537,6 +9839,8 @@ export namespace Prisma {
     justification?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutProductionsCreatedNestedInput
+    updatedBy?: UserUpdateOneWithoutProductionsUpdatedNestedInput
   }
 
   export type ProductionEntryUncheckedUpdateWithoutProductInput = {
@@ -8544,6 +9848,8 @@ export namespace Prisma {
     quantityProduced?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -8553,6 +9859,8 @@ export namespace Prisma {
     quantityProduced?: FloatFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     justification?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    updatedById?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

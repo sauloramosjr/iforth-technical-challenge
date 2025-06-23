@@ -40,7 +40,7 @@ const Pagination = ({ page, totalPages, limit }:PaginationProps) => {
           href={generatePageLink(p)}
           className={`
             px-3 py-1 rounded border text-sm
-            ${p === page ? 'bg-blue-500 text-white' : 'hover:bg-gray-100'}`}
+            ${p === page ? 'bg-blue-500 text-white pointer-events-none ' : 'hover:bg-gray-100'}`}
         >
           {p}
         </Link>
@@ -51,7 +51,7 @@ const Pagination = ({ page, totalPages, limit }:PaginationProps) => {
         className={`
           px-3 py-1 rounded border text-sm
           ${
-            page === totalPages
+            page === totalPages || pages.length <= 1 
               ? 'pointer-events-none opacity-50'
               : 'hover:bg-gray-100'
           } `}

@@ -3,7 +3,7 @@ import { menuList } from '@/lib/constants/menuList';
 import React from 'react';
 
 
-const Apontamentos = () => {
+const ApontamentosPage = () => {
   const items = menuList.find((e) => e.name == 'Apontamentos')!.items;
   return (
     <div className="p-5 ">
@@ -12,4 +12,4 @@ const Apontamentos = () => {
   );
 };
 
-export default Apontamentos;
+export default ApontamentosPage;

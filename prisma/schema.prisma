@@ -14,55 +14,75 @@ enum Status {
 }
 
 model User {
-  id           String              @id @default(uuid())
-  name         String              @unique
-  password     String
-  createdAt    DateTime            @default(now())
-  updatedAt    DateTime            @updatedAt
+  id                    String              @id @default(uuid())
+  name                  String              @unique
+  password              String
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 
-  permissions  UserPermission[]
+  permissions           UserPermission[]
+
+  productsCreated       Product[]           @relation("ProductCreatedBy")
+  productsUpdated       Product[]           @relation("ProductUpdatedBy")
+
+  productionsCreated    ProductionEntry[]   @relation("ProductionEntryCreatedBy")
+  productionsUpdated    ProductionEntry[]   @relation("ProductionEntryUpdatedBy")
 }
 
 model Product {
-  id               String          @id @default(uuid())
-  name             String
-  minProduction    Float
-  maxProduction    Float
-  status           Status          @default(ACTIVE)
-  createdAt        DateTime        @default(now())
-  updatedAt        DateTime        @updatedAt
+  id                    String              @id @default(uuid())
+  name                  String
+  minProduction         Float
+  maxProduction         Float
+  status                Status              @default(ACTIVE)
 
-  productions      ProductionEntry[]
+  createdById           String
+  updatedById           String?
+
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  productions           ProductionEntry[]
+
+  createdBy             User                @relation("ProductCreatedBy", fields: [createdById], references: [id])
+  updatedBy             User?               @relation("ProductUpdatedBy", fields: [updatedById], references: [id])
 }
 
 model ProductionEntry {
-  id                  String       @id @default(uuid())
-  productId           String
-  quantityProduced    Float
-  status              Status       @default(ACTIVE)
-  justification       String?      
-  createdAt           DateTime     @default(now())
-  updatedAt           DateTime     @updatedAt
+  id                    String              @id @default(uuid())
+  productId             String
+  quantityProduced      Float
+  status                Status              @default(ACTIVE)
+  justification         String?      
 
-  product             Product      @relation(fields: [productId], references: [id])
+  createdById           String
+  updatedById           String?
+
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
+
+  createdBy             User                @relation("ProductionEntryCreatedBy", fields: [createdById], references: [id])
+  updatedBy             User?               @relation("ProductionEntryUpdatedBy", fields: [updatedById], references: [id])
+
+  product               Product             @relation(fields: [productId], references: [id])
 }
 
 model Permission {
-  id            String              @id @default(uuid())
-  name          String              @unique
-  createdAt     DateTime            @default(now())
-  updatedAt     DateTime            @updatedAt
+  id                    String              @id @default(uuid())
+  name                  String              @unique
+  createdAt             DateTime            @default(now())
+  updatedAt             DateTime            @updatedAt
 
-  users         UserPermission[]
+  users                 UserPermission[]
 }
 
 model UserPermission {
-  id            String              @id @default(uuid())
-  userId        String
-  permissionId  String
+  id                    String              @id @default(uuid())
+  userId                String
+  permissionId          String
 
-  user          User                @relation(fields: [userId], references: [id])
-  permission    Permission          @relation(fields: [permissionId], references: [id])
+  user                  User                @relation(fields: [userId], references: [id])
+  permission            Permission          @relation(fields: [permissionId], references: [id])
 
-  createdAt     DateTime            @default(now())
+  createdAt             DateTime            @default(now())
 }

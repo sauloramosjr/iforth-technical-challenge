@@ -17,13 +17,18 @@ export default function Notification({ message, type = 'info' }: Props) {
     info: 'ℹ️',
     warning: '⚠️',
   };
+  const _message = message.split('\n');
 
   return (
     <div
       className={`flex items-center gap-2 border-l-4 p-4 rounded shadow-md animate-slide-in ${colors[type]}`}
     >
       <span className="text-lg">{icons[type]}</span>
-      <span>{message}</span>
+      <div className="flex flex-col">
+        {_message.map((m) => {
+          return <span key={m}>{m}</span>;
+        })}
+      </div>
     </div>
   );
 }

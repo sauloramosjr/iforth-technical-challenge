@@ -21,28 +21,48 @@ model User {
   updatedAt DateTime @updatedAt
 
   permissions UserPermission[]
+
+  productsCreated Product[] @relation("ProductCreatedBy")
+  productsUpdated Product[] @relation("ProductUpdatedBy")
+
+  productionsCreated ProductionEntry[] @relation("ProductionEntryCreatedBy")
+  productionsUpdated ProductionEntry[] @relation("ProductionEntryUpdatedBy")
 }
 
 model Product {
-  id            String   @id @default(uuid())
+  id            String @id @default(uuid())
   name          String
   minProduction Float
   maxProduction Float
-  status        Status   @default(ACTIVE)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  status        Status @default(ACTIVE)
+
+  createdById String
+  updatedById String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   productions ProductionEntry[]
+
+  createdBy User  @relation("ProductCreatedBy", fields: [createdById], references: [id])
+  updatedBy User? @relation("ProductUpdatedBy", fields: [updatedById], references: [id])
 }
 
 model ProductionEntry {
-  id               String   @id @default(uuid())
+  id               String  @id @default(uuid())
   productId        String
   quantityProduced Float
-  status           Status   @default(ACTIVE)
+  status           Status  @default(ACTIVE)
   justification    String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+
+  createdById String
+  updatedById String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdBy User  @relation("ProductionEntryCreatedBy", fields: [createdById], references: [id])
+  updatedBy User? @relation("ProductionEntryUpdatedBy", fields: [updatedById], references: [id])
 
   product Product @relation(fields: [productId], references: [id])
 }

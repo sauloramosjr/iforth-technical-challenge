@@ -8,14 +8,11 @@ import { UnauthorizedError } from './http/UnauthorizedError';
 import { JwtInvalidError } from './jwt/JwtInvalidError';
 import { BaseError } from './BaseError';
 import { JwtExpiredError } from './jwt/JwtExpiredError';
+import { getErrorMessage } from '../httpClient/getErrorMessage';
 
 export const exceptions = (error: any): Error => {
   const status = error.response?.status;
-  const message =
-    error.response?.data?.message ||
-    error.response?.data?.error ||
-    error.message ||
-    'Erro desconhecido';
+  const message = getErrorMessage(error)
 
   if (error instanceof BaseError) {
     return error;
@@ -28,6 +25,7 @@ export const exceptions = (error: any): Error => {
   if (error instanceof JWTInvalid) {
     return new JwtInvalidError();
   }
+
 
   switch (status) {
     case 400:

@@ -1,4 +1,4 @@
-import { handleLogin } from '@/features/login/services/LoginServerService';
+import { handleLogin } from '@/features/login/services/loginServerService';
 import TLogin from '@/features/login/types/TLogin';
 import { BadRequestError } from '@/lib/exceptions/http/BadRequestError';
 import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
@@ -13,12 +13,14 @@ export async function POST(req: Request) {
 
     if (!validation.success) {
       if (!validation.success) {
-        throw new BadRequestError(validation.message);
+        return NextResponse.json(
+          { message: validation.message },
+          { status: 400 }
+        );
       }
     }
 
     const user = await handleLogin(body.name, body.password);
-
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
     if (error instanceof BadRequestError) {

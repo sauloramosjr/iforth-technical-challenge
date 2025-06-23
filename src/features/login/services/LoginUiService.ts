@@ -1,8 +1,8 @@
+import { exceptions } from '@/lib/exceptions/exceptions';
 import httpClient from '@/lib/httpClient';
+import { TUserWithToken } from '@/types/TUser';
 import { AxiosError } from 'axios';
 import TLogin from '../types/TLogin';
-import { TUserWithToken } from '@/types/TUser';
-import { exceptions } from '@/lib/exceptions/exceptions';
 
 export const signIn = async (login: TLogin) => {
   try {
@@ -11,7 +11,19 @@ export const signIn = async (login: TLogin) => {
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      exceptions(error.response?.data.message);
+      throw exceptions(error);
+    }
+    throw new Error('Erro inesperado');
+  }
+};
+export const signOut = async () => {
+  try {
+    const response = await httpClient.Get<TUserWithToken>('/api/login/signout');
+
+    return response.data;
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      throw exceptions(error);
     }
     throw new Error('Erro inesperado');
   }

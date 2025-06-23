@@ -10,7 +10,7 @@ export default function Breadcrumbs() {
 
   return (
     <nav className="text-sm text-gray-600 mb-4 ml-10 md:ml-0">
-      <ol className="flex space-x-2">
+      <ol className="flex space-x-2 flex-wrap">
      
 
         {pathNames.map((name, index) => {

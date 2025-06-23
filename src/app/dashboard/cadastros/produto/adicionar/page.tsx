@@ -1,8 +1,12 @@
-import { ProductForm } from '@/features/product/components/ProductForm';
-import React from 'react';
+import { ProductForm } from '@/features/product/components/productForm';
 
-const AdicionarProduto = ({ children }: React.PropsWithChildren) => {
-  return <ProductForm /> 
+const AdicionarProduto = () => {
+  return (
+    <div>
+      <h2 className="text-lg">Adicionar Produto</h2>
+      <ProductForm />
+    </div>
+  );
 };
 
 export default AdicionarProduto;

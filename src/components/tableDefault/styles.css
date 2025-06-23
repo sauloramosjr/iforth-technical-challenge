@@ -1,3 +1,6 @@
+tbody{
+  border:1px solid black!important;
+}
 .col-id {
   width: 250px;
   min-width: 250px;
@@ -9,6 +12,19 @@
   max-width: 70px;
 }
 
+tbody{
+
+  tr{
+    
+    &:nth-child(2n){
+      background:rgb(241, 241, 241);
+    }
+    &:hover{
+      background: #e5e7eb;
+    }
+  }
+}
+
 td {
   &:first-of-type {
     border-left: none;
@@ -16,6 +32,7 @@ td {
   &:last-of-type {
     border-right: none;
   }
+
   border-left: 1px solid black;
   border-top: none;
   border-bottom: none;
@@ -33,3 +50,4 @@ th {
   border-bottom: none;
   border-bottom: 1px solid black;
 }
+

@@ -1,8 +1,10 @@
 import ButtonDefault from '@/components/buttonDefault';
+import { TColumn } from '@/components/tableDefault';
+import { StatusEnum } from '@/enums/status';
 import { Product } from '@/lib/orm/generated';
-import { StatusEnum } from '../../enums/status';
+import { TProduct } from '../../types/TProduct';
 
-export const columns = [
+export const columns: TColumn<TProduct>[] = [
   { title: 'ID', key: 'id', className: 'col-id' },
   {
     title: 'AÇÕES',
@@ -25,38 +27,37 @@ export const columns = [
   {
     title: 'SITUAÇÃO',
     key: 'status',
-    className: 'col-situacao',
+    className: 'col-situacao text-center',
     render: (item: Product) => (
       <span
-        className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${
-          item.status === 'ACTIVE'
-            ? 'bg-green-100 text-green-800'
-            : 'bg-red-100 text-red-800'
+        className={`inline-flex items-center px-3 py-1 rounded-full  text-xs font-medium ${
+          item.status === 'ACTIVE' ? 'bg-blue-100 text-blue-800' : ''
         }`}
       >
         {StatusEnum[item.status]}
       </span>
     ),
+    sortable: true,
   },
-  { title: 'PRODUTO', key: 'name', className: 'col-PRODUTO' },
   {
-    title: 'PRODUÇÃO MIN.',
+    title: 'PRODUTO',
+    key: 'name',
+    className: 'col-PRODUTO text-center',
+
+    sortable: true,
+  },
+  {
+    title: 'PADRÃO DE PRODUÇÃO',
     key: 'minProduction',
-    className: 'text-end col-prod-min',
+    className: 'text-end col-prod-default',
     render: (item: Product) => (
-      <span className="inline-block border border-red-400 text-red-600 px-3 py-1 rounded-full text-xs font-medium">
-        {item.minProduction} m²
+      <span className="px-3 py-1  font-bold">
+        Mín.:
+        <span className="text-green-700 mr-2 ml-1">{item.minProduction}m²</span>
+        Máx.:
+        <span className="text-blue-700 mr-2 ml-1">{item.maxProduction}m²</span>
       </span>
     ),
-  },
-  {
-    title: 'PRODUÇÃO MAX.',
-    key: 'maxProduction',
-    className: 'text-end col-prod-max',
-    render: (item: Product) => (
-      <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium">
-        {item.maxProduction} m²
-      </span>
-    ),
+    sortable: true,
   },
 ];

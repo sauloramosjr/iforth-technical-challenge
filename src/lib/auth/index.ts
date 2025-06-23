@@ -9,7 +9,7 @@ export const generateToken = async (userId: string) => {
   const token = await new SignJWT({ userId })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('20s') // ou '1d', '2h', etc.
+    .setExpirationTime('10s') 
     .sign(JWT_SECRET);
 
   return token;
@@ -35,4 +35,7 @@ export const refreshToken = async (oldToken: string) => {
 
 export const encriptPassword = async (password: string) => {
   return bcrypt.hash(password, SALT_ROUNDS);
+};
+export const decriptPassword = async (passwordA: string, passwordB:string) => {
+  return bcrypt.compare(passwordA, passwordB);
 };
