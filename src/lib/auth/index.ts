@@ -9,7 +9,7 @@ export const generateToken = async (userId: string) => {
   const token = await new SignJWT({ userId })
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
-    .setExpirationTime('10s')
+    .setExpirationTime('10m')
     .sign(JWT_SECRET);
 
   return token;

@@ -2,8 +2,6 @@
 
 import { ListPageWrapper } from '@/components/listPageWrapper';
 import { useNotification } from '@/components/notifications/provider';
-import produtoService from '@/features/product/services/produtoService';
-import { TProduct } from '@/features/product/types/TProduct';
 import ProductionFilters from '@/features/production/components/productionFilters';
 import ProductionTable from '@/features/production/components/productionTable';
 import { useProduction } from '@/features/production/providers';
@@ -14,7 +12,7 @@ import {
 } from '@/features/production/types/TProduction';
 import { getErrorMessage } from '@/lib/httpClient/getErrorMessage';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 
 const Producao = () => {
@@ -92,27 +90,29 @@ const Producao = () => {
   };
 
   return (
-    <ListPageWrapper<TProductionWithProduct>
-      sort={`${sortedColumn.key}:${sortedColumn.direction}`}
-      dataChanged={dataChanged}
-      fetchData={fetchProducts}
-      FiltersComponent={({ onChangeFilter, searchParams }) => (
-        <ProductionFilters
-          products={products}
-          onChangeFilter={onChangeFilter}
-          searchParams={searchParams}
-        />
-      )}
-      tableComponent={(data, isPending) => (
-        <ProductionTable
-          isPending={isPending}
-          productions={data}
-          handleChangeStatus={handleChangeStatus}
-          onSortChange={handleSortChange}
-        />
-      )}
-      onAdd={() => router.push('/dashboard/apontamentos/producao/adicionar')}
-    />
+    <Suspense>
+      <ListPageWrapper<TProductionWithProduct>
+        sort={`${sortedColumn.key}:${sortedColumn.direction}`}
+        dataChanged={dataChanged}
+        fetchData={fetchProducts}
+        FiltersComponent={({ onChangeFilter, searchParams }) => (
+          <ProductionFilters
+            products={products}
+            onChangeFilter={onChangeFilter}
+            searchParams={searchParams}
+          />
+        )}
+        tableComponent={(data, isPending) => (
+          <ProductionTable
+            isPending={isPending}
+            productions={data}
+            handleChangeStatus={handleChangeStatus}
+            onSortChange={handleSortChange}
+          />
+        )}
+        onAdd={() => router.push('/dashboard/apontamentos/producao/adicionar')}
+      />
+    </Suspense>
   );
 };
 

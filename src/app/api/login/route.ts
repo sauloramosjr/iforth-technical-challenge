@@ -34,6 +34,7 @@ export async function POST(req: Request) {
     if (error instanceof UnauthorizedError) {
       return NextResponse.json({ message: error.message }, { status: 401 });
     }
+    console.log(error)
 
     return NextResponse.json(
       { message: 'Erro interno do servidor' },

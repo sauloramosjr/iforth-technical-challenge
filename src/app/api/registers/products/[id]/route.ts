@@ -3,7 +3,8 @@ import { BaseError } from '@/lib/exceptions/BaseError';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(_req: NextRequest) {
-  const id = _req.nextUrl.searchParams.get('id');
+  const pathsplited = _req.nextUrl.pathname.split('/');
+  const id = pathsplited[pathsplited.length - 1];
 
   if (!id) {
     return NextResponse.json({ message: 'Id necessário!' }, { status: 400 });
