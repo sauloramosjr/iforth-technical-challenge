@@ -16,6 +16,24 @@ Este é um projeto de teste técnico para a empresa **Iforth**, utilizando **Nex
 
 ---
 
+## 🏛️ Arquitetura
+O projeto adota uma arquitetura baseada em dois pilares:
+
+#### 🔹 Clean Architecture:
+- Separação clara entre as camadas de apresentação (UI), serviços (lógica de dados) e tipagem/modelos.
+- Facilita manutenção, testes e evolução do projeto.
+
+#### 🔸 Feature-Based Architecture (Arquitetura Modular):
+- Organização do projeto por funcionalidades (features) e não por tipo técnico.
+- Cada feature possui seus próprios componentes, serviços e tipos.
+
+#### 🔥 Benefícios:
+- Escalabilidade
+- Alta coesão e baixo acoplamento
+- Facilidade para manutenção e evolução
+- Legibilidade e organização
+
+---
 ## ⚙️ Variáveis de Ambiente (.env)
 
 Crie um arquivo `.env` na raiz do projeto com o seguinte conteúdo:
@@ -31,7 +49,11 @@ Para acessar o sistema, utilize as seguintes credenciais fixas:
 Usuário: iforth.development.test
 Senha: famosaSenha123
 
-## 📥 Como rodar o projeto localmente
+## 🔧 Pré-requisitos
+- Node.js (v18 ou superior)
+- npm/yarn
+## 📥 Como rodar o projeto 
+
 1. Instale as dependências:
 ```bash 
 npm install
