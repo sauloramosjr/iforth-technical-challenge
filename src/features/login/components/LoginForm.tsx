@@ -4,7 +4,7 @@ import { useEffect, useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useNotification } from '@/components/notifications/provider';
-import { StorageKeys } from '@/lib/constants/cookieskeys';
+import { StorageKeys } from '@/enums/cookieskeys';
 import { getErrorMessage } from '@/lib/httpClient/getErrorMessage';
 import { useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';

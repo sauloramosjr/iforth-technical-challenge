@@ -2,7 +2,7 @@ import { ProductionRepository } from '@/features/production/repository';
 import { TProductionCreate } from '@/features/production/types/TProduction';
 import { verifyToken } from '@/lib/auth';
 import { BaseError } from '@/lib/exceptions/BaseError';
-import { parseSelectParam } from '@/lib/httpUtils/parseSelectParams';
+import { parseSelectParam } from '@/lib/httpClient/utils/parseSelectParams';
 import { Prisma, Status } from '@/lib/orm/generated';
 import validateBody from '@/lib/validations/attributesRequestValidation';
 import { NextRequest, NextResponse } from 'next/server';

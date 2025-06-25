@@ -95,30 +95,42 @@ export function DataTable<T extends { id: number | string }>({
     setAnchorEl(null);
   };
 
-  const handleSort = (key: string) => {
-    let newDirection: 'asc' | 'desc' = 'asc';
-    if (sortKey === key && sortDirection === 'asc') {
+const handleSort = (key: string) => {
+  let newDirection: 'asc' | 'desc' = 'asc';
+
+  if (sortKey === key) {
+    if (sortDirection === 'asc') {
       newDirection = 'desc';
-    }
-    if (sortDirection === 'desc' && key == sortKey) {
+    } else if (sortDirection === 'desc') {
+      // Terceiro clique: reset
       setSortKey('');
       setSortDirection('');
       if (onSortChange) {
         onSortChange('createdAt', 'desc');
       }
-      router.push(path);
+
+      const newParams = new URLSearchParams(searchParams);
+      newParams.delete('sort');
+      newParams.set('createdAt', 'desc');
+      router.push(`${path}?` + newParams.toString());
       return;
     }
-    setSortKey(key);
-    setSortDirection(newDirection);
-    const newParams = new URLSearchParams(searchParams);
-    newParams.set('sort', `${key}:${newDirection}`);
+  }
 
-    if (onSortChange) {
-      onSortChange(key, newDirection);
-    }
-    router.push(`${path}?` + newParams);
-  };
+  // Atualiza estado e URL
+  setSortKey(key);
+  setSortDirection(newDirection);
+
+  if (onSortChange) {
+    onSortChange(key, newDirection);
+  }
+
+  const newParams = new URLSearchParams(searchParams);
+  newParams.set('sort', `${key}:${newDirection}`);
+  newParams.delete('createdAt');
+  router.push(`${path}?` + newParams.toString());
+};
+
 
   const navigateToChield = (id: string) => {
     router.push(path + '/' + id);

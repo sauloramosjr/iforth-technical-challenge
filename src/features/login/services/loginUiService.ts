@@ -1,6 +1,6 @@
 import { exceptions } from '@/lib/exceptions/exceptions';
 import httpClient from '@/lib/httpClient';
-import { TUserWithToken } from '@/types/TUser';
+import { TUserWithToken } from '@/features/user/types/TUser';
 import { AxiosError } from 'axios';
 import TLogin from '../types/TLogin';
 

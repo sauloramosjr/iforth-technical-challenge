@@ -1,6 +1,6 @@
-import { TUser, TUserCreate } from '@/types/TUser';
-import orm from '../orm';
-import { Prisma } from '../orm/generated';
+import { TUser, TUserCreate } from '@/features/user/types/TUser';
+import orm from '../../../lib/orm';
+import { Prisma } from '../../../lib/orm/generated';
 
 const findOne = (where: Prisma.UserWhereUniqueInput): Promise<TUser | null> => {
   return orm.user.findUnique({ where });

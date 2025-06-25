@@ -1,6 +1,6 @@
-import { THttpResponsePaginated } from '@/types/THttpResponse';
 import axiosInstance from './axiosInstance';
 import { AxiosRequestConfig } from 'axios';
+import { THttpResponsePaginated } from './types/THttpResponse';
 
 type ApiResponse<T> = {
   data: T;

@@ -1,6 +1,6 @@
 'use client';
 
-import { menuList } from '@/lib/constants/menuList';
+import { menuList } from '@/components/sidebarMenu/menuList';
 import { useState } from 'react';
 import ButtonDefault from '../buttonDefault';
 import MenuItems from './menuItems';

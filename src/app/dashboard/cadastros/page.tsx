@@ -1,5 +1,5 @@
 import MenuItems from '@/components/sidebarMenu/menuItems';
-import { menuList } from '@/lib/constants/menuList';
+import { menuList } from '@/components/sidebarMenu/menuList';
 import React from 'react';
 
 

@@ -1,7 +1,7 @@
 import { ProductRepository } from '@/features/product/repository';
 import { TProductCreate } from '@/features/product/types/TProduct';
 import { verifyToken } from '@/lib/auth';
-import { parseSelectParam } from '@/lib/httpUtils/parseSelectParams';
+import { parseSelectParam } from '@/lib/httpClient/utils/parseSelectParams';
 import { Prisma, Status } from '@/lib/orm/generated';
 import validateBody from '@/lib/validations/attributesRequestValidation';
 import { NextRequest, NextResponse } from 'next/server';

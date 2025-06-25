@@ -1,6 +1,6 @@
-import { decriptPassword, encriptPassword, generateToken } from '@/lib/auth';
+import { UserRepository } from '@/features/user/repository/UserRepository';
+import { decriptPassword, generateToken } from '@/lib/auth';
 import { UnauthorizedError } from '@/lib/exceptions/http/UnauthorizedError';
-import { UserRepository } from '@/lib/repository/UserRepository';
 
 export const handleLogin = async (name: string, password: string) => {
   const user = await UserRepository.findOne({ name });

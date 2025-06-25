@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { TMenuItem } from '@/lib/constants/menuList';
+import { TMenuItem } from '@/components/sidebarMenu/menuList';
 
 const MenuItems = ({
   items,
