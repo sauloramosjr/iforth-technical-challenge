@@ -33,7 +33,7 @@ export default function ProductView() {
   }, [path]);
 
   if (loading) {
-    return <div className="p-5">Carregando...</div>;
+    return <div className="p-5 w-full text-center5">Carregando...</div>;
   }
 
   if (error) {

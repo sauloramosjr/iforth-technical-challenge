@@ -165,13 +165,13 @@ const handleSort = (key: string) => {
         <tbody className="divide-y w-full h-auto overflow-y-auto">
           {isLoading ? (
             <tr className="w-full">
-              <td colSpan={columns.length} className="p-5 text-center">
+              <td colSpan={columns.length+1} className="p-5 text-center w-full">
                 Carregando...
               </td>
             </tr>
-          ) : data && data.length === 0 ? (
+          ) : (data != null && data?.length === 0 )? (
             <tr className="w-full">
-              <td colSpan={columns.length} className="p-5 text-center">
+              <td colSpan={columns.length} className="p-5 text-center w-full">
                 {emptyMessage}
               </td>
             </tr>
