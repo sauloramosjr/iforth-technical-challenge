@@ -2,6 +2,7 @@
 
 import InputDefault from '@/components/inputDefault';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import ButtonDefault from '../buttonDefault';
 
 type Option = {
   label: string;
@@ -25,12 +26,11 @@ export default function SelectFilter({
   onChange,
   error,
 }: SelectFilterProps) {
-  const [inputValue, setInputValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(value);
   const [showOptions, setShowOptions] = useState<boolean>(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Sempre que o valor externo mudar, atualize o texto exibido
     const label = options.find((opt) => opt.value === value)?.label || '';
     setInputValue(label);
   }, [value, options]);
@@ -44,10 +44,13 @@ export default function SelectFilter({
         setShowOptions(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    if (!inputValue) handleClear();
+  }, [inputValue]);
 
   const handleInputChange = (val: string) => {
     setInputValue(val);
@@ -60,24 +63,41 @@ export default function SelectFilter({
     onChange(option.value);
   };
 
-  // Filtrar opções por label digitado (case-insensitive)
+  const handleClear = () => {
+    setInputValue('');
+    onChange('');
+    setShowOptions(false);
+  };
+
   const filteredOptions = options.filter((opt) =>
     opt.label.toLowerCase().includes(inputValue.toLowerCase())
   );
 
   return (
     <div className={`relative w-full ${className}`} ref={containerRef}>
-      <InputDefault
-        type="text"
-        value={inputValue}
-        placeholder={placeholder}
-        onFocus={() => setShowOptions(true)}
-        autoComplete="off"
-        error={error}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => {
-          handleInputChange(e.target.value);
-        }}
-      />
+      <div className="relative w-full">
+        <InputDefault
+          type="text"
+          value={inputValue}
+          placeholder={placeholder}
+          onFocus={() => setShowOptions(true)}
+          autoComplete="off"
+          error={error}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => {
+            handleInputChange(e.target.value);
+          }}
+        />
+
+        {inputValue && (
+          <ButtonDefault
+            type="button"
+            onClick={handleClear}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 "
+          >
+            <span>x</span>
+          </ButtonDefault>
+        )}
+      </div>
 
       {showOptions && filteredOptions.length > 0 && (
         <div className="absolute z-[99] mt-1 w-full max-h-60 overflow-auto rounded-md border bg-white shadow-md">
